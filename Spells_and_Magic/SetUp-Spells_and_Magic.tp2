@@ -126,7 +126,7 @@ BEGIN @101  //Install All New Spells (including iwdee spells if not already inst
 SUBCOMPONENT @51 //New Spells
 DESIGNATED 101
 GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @17 //~EE games only!~  ...for now
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
 
 //set relevant variables
 OUTER_SET b_new_spells    = 1
@@ -192,8 +192,12 @@ INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-BEGIN @200 SUBCOMPONENT @3403 DESIGNATED 200 GROUP @2
-REQUIRE_PREDICATE (GAME_IS ~iwdee bgee bg2ee eet~) @3004
+BEGIN @200  //Add Spell Scroll Crafting
+SUBCOMPONENT @52 //Scroll Crafting
+DESIGNATED 200
+GROUP @2  //Magic Item Creation
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
 
 LAM b_scroll_global_settings
 
@@ -211,9 +215,12 @@ INCLUDE ~%folder%/components/class_skills/scroll_crafting.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-BEGIN @201 SUBCOMPONENT @3403 DESIGNATED 201
-REQUIRE_PREDICATE (GAME_IS ~iwdee bgee bg2ee eet~) @3004
-//REQUIRE_PREDICATE (CHECK FOR NO SCROLLS) @3007  //~Priest scrolls have already been added!~
+BEGIN @201  //Add Spell Scroll Crafting (add missing priest scrolls)
+SUBCOMPONENT @52 //Scroll Crafting
+DESIGNATED 201
+GROUP @2  //Magic Item Creation
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~B_sna201.itm~) AND !(FILE_EXISTS_IN_GAME ~B_fnp070.itm~) @902  //~Priest scrolls have already been added by other means!~
 
 LAM b_scroll_global_settings
 

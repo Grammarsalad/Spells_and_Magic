@@ -2,11 +2,21 @@
 //@0 to @50: groups
 @0 = ~New and Revised Spells~
 
+@2 = ~Magic Item Creation~
+
 //@51 to @100: subcomponents
 @51 = ~New Spells~
+@52 = ~Scroll Crafting~
 
-//@101 to @1000: Components
+//@101 to @900: Components
 @101 = ~Install All New Spells (including iwdee spells if not already installed)~
+
+@200 = ~Add Spell Scroll Crafting~
+@201 = ~Add Spell Scroll Crafting (add missing priest scrolls)~
+
+//@901 to @1000: error and misc
+@901 = ~EE games only! ... for now~
+@902 = ~Priest scrolls have already been added by other means!~
 
 /*
 @0 = ~Install All new spells (including IWDEE spells if applicable)~
