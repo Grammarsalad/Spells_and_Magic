@@ -1,0 +1,215 @@
+BACKUP ~backup/Spells_and_Magic~
+AUTHOR ~Grammarsalad~
+//README ~Spells_and_Magic\Spells_and_Magic_README.pdf~
+
+VERSION ~0.91.00~
+
+
+ALWAYS
+
+        OUTER_SPRINT ~folder~ ~Spells_and_Magic~
+
+ 	ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+          OUTER_SPRINT ~game~ ~bg2ee~
+        END
+
+ 	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+          OUTER_SPRINT ~game~ ~bgee~
+        END
+
+ 	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+          OUTER_SPRINT ~game~ ~iwdee~
+        END
+
+ 	ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
+          OUTER_SPRINT ~style~ ~bgee~
+        END
+
+ 	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+          OUTER_SPRINT ~style~ ~iwdee~
+        END
+
+  	INCLUDE ~Spells_and_Magic/Spells_and_Magic.ini~
+
+        INCLUDE ~Spells_and_Magic/lib/item_in_store.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/spon_cast_functions.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/replace_text.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/variables.ini~
+
+        INCLUDE ~Spells_and_Magic/lib/add_icons.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/add_headers.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/add_spell_ex.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/add_sumtable.tpa~
+
+	INCLUDE ~Spells_and_Magic/lib/SEQUENCER_MENU.tpa~
+        
+        INCLUDE ~Spells_and_Magic/lib/illusion_crea.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/alter_spell_type.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/second_opp.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/tooltips.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/make_cantrip.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/alter_effect.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/alter_effect_add.tpa~
+
+	INCLUDE ~Spells_and_Magic/lib/remove_lines.tpa~
+
+	INCLUDE ~Spells_and_Magic/lib/summon_table.tpa~
+
+	INCLUDE ~Spells_and_Magic/lib/splprot_attributes.tpa~
+
+	INCLUDE ~Spells_and_Magic/lib/spell_to_innate.tpa~
+
+	INCLUDE ~Spells_and_Magic/lib/spell_clone_effects.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_fnp.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_b_vise.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_spell_saves.tpa~
+
+        INCLUDE ~Spells_and_Magic/lib/extra_alter_effect.tpa~
+
+  	INCLUDE ~Spells_and_Magic/lib/scroll_placement.tpa~
+
+END
+
+//Below from IWDification. Looks like a way to check spell.ids for particular spells...
+//ACTION_IF (!FILE_CONTAINS_EVALUATED(~spell.ids~ ~WIZARD_SNILLOCS_SNOWBALL_SWARM~) OR override_arcane) BEGIN
+
+//need to keep my options open
+
+ASK_EVERY_COMPONENT
+
+/* Language Settings */
+AUTO_TRA ~Spells_and_Magic/tra/%s~
+LANGUAGE ~English~ ~english~
+         ~Spells_and_Magic/tra/english/setup.tra~
+         ~Spells_and_Magic/tra/english/IWD_spells.tra~  //for IWDEE spells
+         ~Spells_and_Magic/tra/english/new_spells.tra~  //for new spells
+//         ~Spells_and_Magic/tra/english/cantrips.tra~  //for cantrips
+//         ~Spells_and_Magic/tra/english/revised.tra~  //for revised
+//         ~Spells_and_Magic/tra/english/items.tra~  //for items
+         ~Spells_and_Magic/tra/english/icons.tra~   //icons
+
+///NOTE TO SELF: COMPLETELY REDO tp2 with finished products from Spells_and_Magic/comp/%VAR%.tpa~
+
+
+//CONTINUE FROM HERE
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////                                                                          ////////////////////////
+////////////////////////             Spells & Magic: 101-???: New and Revised Spells              ////////////////////////
+////////////////////////                                                                          ////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+///////                                                   ///////
+///////    Components 101-103: New and Revised Spells     ///////
+///////                                                   ///////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//			101: Install All New Spells 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @101  //Install All New Spells (including iwdee spells if not already installed)
+SUBCOMPONENT @51 //New Spells
+DESIGNATED 101
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @17 //~EE games only!~  ...for now
+
+//set relevant variables
+OUTER_SET b_new_spells    = 1
+OUTER_SET b_iwdee_spells  = 1
+
+//SR NWN deflection compatibility
+ACTION_CLEAR_ARRAY aoe_spell
+
+///////////////////////////////////////
+//////////// player modified variables
+
+LAM b_spells_new_spells_settings
+LAM b_spells_iwdee_spells_settings
+LAM b_spells_cantrip_0_settings //because this gets checked on occasion
+LAM b_spells_cantrip_1_settings //because this gets checked on occasion
+
+//install iwdee spells if applicable
+ACTION_IF !(GAME_IS ~iwdee~) BEGIN  //let's eliminate iwdee spells if already
+  //arcane
+  INCLUDE ~%folder%/comp/Setup_IWD_Arcane_Spells.tpa~  //
+  //divine
+  INCLUDE ~%folder%/comp/Setup_IWD_Divine_Spells.tpa~
+END
+
+//arcane spells
+INCLUDE ~%folder%/comp/Setup_New_Arcane_Spells.tpa~  //
+
+
+//divine spells
+INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
+
+
+
+
+
+
+/*
+
+//Add IWD spells if not already in game_____________________________________________
+
+//IWDEE Spells
+//IWDEE priest spells not installed
+//include
+//Detects IWDEE priest spells- Not SR: checked in individual setup tpas
+ACTION_IF (!FILE_CONTAINS_EVALUATED(~spell.ids~ ~CLERIC_CURSE~)) BEGIN  //if not IWDEE priest spells..from any source
+      COPY ~%folder%/compatibility/b_IWD.itm~ ~override~   	//to detect this component
+      COPY ~%folder%/compatibility/b_IWD.itm~ ~override/B_pri.itm~
+        INCLUDE ~%folder%/data/components/Setup_IWD_Spells.tpa~      //install priest spells
+
+ACTION_IF ((!FILE_CONTAINS_EVALUATED(~spell.ids~ ~CLERIC_BEAST_CLAW~)) AND (FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~)) BEGIN
+ INCLUDE ~%folder%/lib/iwdee_sr_readd.tpa~
+END
+
+//special: reinstall spells if any version of SR installed
+ACTION_IF FILE_EXISTS_IN_GAME ~dvsrv4here.mrk~ BEGIN
+  INCLUDE ~%folder%/lib/sr_readd.tpa~
+END
+
+//Now, for other IWDEE wiz spells--Not SR which will be checked in game
+ACTION_IF (!FILE_CONTAINS_EVALUATED(~spell.ids~ ~WIZARD_CATS_GRACE~)) BEGIN    //if not other IWDEE wiz spells
+    INCLUDE ~%folder%/data/components/Setup_IWD_Wiz.tpa~      //install non-fnp Wiz spells
+   COPY ~%folder%/compatibility/b_IWD.itm~ ~override/b_wiz.itm~ //to detect all (my) IWDEE wiz spells
+   END
+   COPY ~%folder%/compatibility/b_IWD.itm~ ~override~   //to detect IWDEE priest (and a few wiz) spells
+END
+
+//Add new spells if not in game
+ACTION_IF (!FILE_CONTAINS_EVALUATED(~spell.ids~ ~CLERIC_ABUNDANT_AMMO~)) BEGIN    //
+  INCLUDE ~%folder%/lib/fnp_new_spells.tpa~
+END
+ACTION_IF (!FILE_CONTAINS_EVALUATED(~spell.ids~ ~WIZARD_ACCELERATE_HEALING~)) BEGIN  //if not my new spells
+    INCLUDE ~%folder%/data/components/Setup_New_Spells.tpa~      //New Spells
+END
+
+*/

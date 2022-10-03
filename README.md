@@ -1,1 +1,2 @@
-# Spells_and_Magic
+# Spells & Magic
+

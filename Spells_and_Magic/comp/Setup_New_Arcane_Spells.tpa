@@ -1,0 +1,192 @@
+//Copy over from Setup_New_Spells.tpa and fnp_wiz.tpa for ALL Arcane Spells (excepting Cantrips and HLA)--ONLY FINISHED PRODUCT WILL GO HERE
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////                                         //////////////////////////////////////
+/////////////////////////////////////               Arcane Spells             //////////////////////////////////////
+/////////////////////////////////////                                         //////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////            //////////////////////////
+////////////////////////   Level 1  //////////////////////////
+////////////////////////            //////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//_________________________________________________________________ALARM________________________________________________________________________________//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ACTION_IF (%b_alarm% > 0) BEGIN  //
+
+////////////////////////////
+//////NOTES:
+////////////////////////////
+//1st level cantrips: Converted to a second level spell, unchanged
+//Add portrait icon for innate alarm spell (speed increased or somesuch thing)
+
+///////////////////////////////////////////////
+//////Spell Basics: Pros, effs, bams, wavs, etc
+///////////////////////////////////////////////
+
+LAF ADD_SPELL_EX INT_VAR type = 3 max = 99 STR_VAR file = EVAL ~%folder%/data/new_spells/mage_1/b_alarm.spl~ name = ~INNATE_ALARM~ RET spell_res END
+COPY_EXISTING ~%spell_res%.spl~ ~override~
+  SAY NAME1 @65201
+  SAY NAME2 @65201
+  LPF ALTER_EFFECT
+      INT_VAR match_opcode = 318            //'Protect' enemies from alarm effects
+      STR_VAR match_resource = ~B_ALARM~
+              resource = EVAL ~%spell_res%~
+  END      //
+
+//itm
+COPY ~%folder%/data/new_spells/mage_1/b_w101.itm~ ~override~   //itm alarm
+//baf
+COMPILE ~%folder%/data/new_spells/mage_1/b_alarm.baf~    //script
+//cre
+COPY ~%folder%/data/new_spells/mage_1/b_w101.cre~ ~override~   //cre alarm
+       SAY 0x8 @65201
+       SAY 0xc @65201
+
+///////////////////////////////////////////////////
+//////Spell Itself (and spell biz (e.g. sec spells)
+///////////////////////////////////////////////////
+
+ADD_SPELL ~%folder%/data/new_spells/mage_1/b_w101.spl~ 2 1 ~WIZARD_ALARM_SPELL~ //
+        SAY NAME1 @65201
+        SAY NAME2 @65201
+        SAY UNIDENTIFIED_DESC @65202
+	SAY DESC @65202
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~WIZARD_ALARM_SPELL~
+  RET spell_res
+END
+
+////////////////////////////////
+//////Add Icons, Projectiles and Scrolls:
+////////////////////////////////
+
+LAF ADD_ICONS
+    INT_VAR port_text     = RESOLVE_STR_REF(@1003) //Alarmed
+            rename        = 1
+            add_port_icon = 1
+            create_scroll = 1
+    STR_VAR spell_name    = EVAL ~%spell_res%~ //
+            pathA         = ~%folder%/data/icons/mage_1/B_W101a.bam~
+            pathB         = ~%folder%/data/icons/mage_1/B_W101b.bam~
+            pathC         = ~%folder%/data/icons/mage_1/B_W101c.bam~
+            pathP         = ~%folder%/data/port_icons/mage_1/B_W101P.bam~
+            scroll_path   = ~%folder%/data/scrolls/generic/B_W103.itm~   //blank scroll
+    RET    port_icon
+           scroll_name
+           iconA
+           iconB
+           iconC
+           iconP
+END
+
+
+
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~INNATE_ALARM~
+  RET spell_res
+END
+
+COPY_EXISTING ~%spell_res%.spl~ ~override~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 142 parameter2 = %port_icon% END           //
+
+
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~WIZARD_ALARM_SPELL~
+  RET spell_res
+END
+
+////////////////////////////////////////////
+////////    Place Scrolls
+
+//add to list for 1st level mage scrolls
+COPY ~%folder%\lib\scroll_stores\place_wiz_scrolls.tpa~ ~%folder%\lib\scroll_stores\place_wiz_scrolls.tpa~
+  REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%scroll_name%~ => ~1~"
+
+
+
+////////////////////////////
+//////Compatibility
+////////////////////////////
+
+////////////////////////////////////////////
+////////    Other components
+
+//in case 0 level cantrips either way
+COPY ~%folder%\lib\component_lists\zero_level_cantrips.tpa~ ~%folder%\lib\component_lists\zero_level_cantrips.tpa~
+  REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%spell_res%~ => ~%b_zero_alarm%~"
+
+//in case 1 lev cantrips
+COPY ~%folder%\lib\component_lists\one_level_cantrips.tpa~ ~%folder%\lib\component_lists\zero_level_cantrips.tpa~
+  REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%spell_res%~ => ~%b_one_alarm%~"
+
+//in case rituals
+COPY ~%folder%\lib\component_lists\rituals.tpa~ ~%folder%\lib\component_lists\zero_level_cantrips.tpa~
+  REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%spell_res%~ => ~%b_ritual_alarm%~"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////    Other spells: protect against (removes or protects vs other spells)
+
+//Sleep spells: protection from 
+COPY ~%folder%\lib\spell_lists\prot_list.tpa~ ~%folder%\lib\spell_lists\prot_list.tpa~
+  REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%spell_res%~ => ~sleep~"
+
+//Sleep spells: remove
+COPY ~%folder%\lib\spell_lists\remove_list.tpa~ ~%folder%\lib\spell_lists\prot_list.tpa~
+  REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%spell_res%~ => ~sleep~"
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////    Other spells: protect from (other spells protect or remove this one)
+
+//silence removes
+//CONTINUE (TO DO??)
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+////////                                  Other Options
+
+ ACTION_IF (%b_alarm% > 1) BEGIN  //
+    LAF ADD_CLASS_SPELL STR_VAR resref = EVAL ~%spell_res%~ scroll= EVAL ~%scroll_name%~ class_include=~{'MAGE_ALL', 'SORCERER', 'RANGER', 'BARD'}~ END
+ END
+
+END //end alarm
+
+
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+////////////////////////            //////////////////////////
+////////////////////////   Scroll   //////////////////////////
+//////////////////////// Placement  //////////////////////////
+////////////////////////            //////////////////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+INCLUDE ~%folder%\lib\scroll_stores\place_wiz_scrolls.tpa~
+
+ACTION_PHP_EACH scroll_wiz_placement AS scroll_item => item_level BEGIN
+ // PRINT "What is %scroll_item%. How about %item_level%?"
+      LAF SCROLL_PLACEMENT
+         INT_VAR
+            level = "%item_level%"
+         STR_VAR
+           file = EVAL "%scroll_item%"
+      END  //scroll placement
+END //php
