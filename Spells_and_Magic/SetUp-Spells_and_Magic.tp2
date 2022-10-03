@@ -33,13 +33,11 @@ ALWAYS
 
         INCLUDE ~Spells_and_Magic/craft_settings.ini~
 
-        INCLUDE ~Spells_and_Magic/lib/item_in_store.tpa~
+        INCLUDE ~Spells_and_Magic/lib/variables.ini~
+
+        INCLUDE ~Spells_and_Magic/snm_functions.tpa~
 
         INCLUDE ~Spells_and_Magic/lib/spon_cast_functions.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/replace_text.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/variables.ini~
 
         INCLUDE ~Spells_and_Magic/lib/add_icons.tpa~
 
@@ -50,20 +48,8 @@ ALWAYS
         INCLUDE ~Spells_and_Magic/lib/add_sumtable.tpa~
 
 	INCLUDE ~Spells_and_Magic/lib/SEQUENCER_MENU.tpa~
-        
-        INCLUDE ~Spells_and_Magic/lib/illusion_crea.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/alter_spell_type.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/second_opp.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/tooltips.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/make_cantrip.tpa~
 
         INCLUDE ~Spells_and_Magic/lib/alter_effect.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/alter_effect_add.tpa~
 
 	INCLUDE ~Spells_and_Magic/lib/remove_lines.tpa~
 
