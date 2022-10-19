@@ -2,6 +2,12 @@
 
 # log
 
+Version 0.91.01
+
+2022-10-03 - 10-09-19
+
+- Revised Scroll creation code (made it a bit more efficient)
+
 2022-10-02
 
 - Started/Continued with scroll placement function (just scrolls and universal right now)

@@ -3,6 +3,848 @@
 //////////////////
 /////////////////       create dialog for scroll crafting
 
+//////////////////////////////////////////////////////////////////////////
+/////// Step 0: Copy over any initial required files (or for convienience)
+
+
+//spls for xp cost
+ACTION_IF (%b_xp_scroll_cost% > 0) BEGIN //xp reduction spls
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override~
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP02.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 12) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP03.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 18) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP04.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 40) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP05.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 50) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP06.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 60) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP07.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 112) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP08.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 128) END
+ COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP09.spl~
+    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 144) END
+END
+
+//scroll kits
+ACTION_IF (%b_material_scroll_cost% > 0) BEGIN //scroll kits
+//standard materials
+COPY ~%folder%/data/scrolls/B_BPG01.bam~ ~override~  //Scroll kit image
+COPY ~%folder%/data/scrolls/B_BPG01.itm~ ~override~  //blank scroll item
+        SAY NAME1 @115104
+        SAY NAME2 @115104
+        SAY UNIDENTIFIED_DESC @115105
+	SAY DESC @115105
+
+//quality materials
+COPY ~%folder%/data/scrolls/B_BPG02.bam~ ~override~  //Scroll kit image
+COPY ~%folder%/data/scrolls/B_BPG02.itm~ ~override~  //blank scroll item
+        SAY NAME1 @115106
+        SAY NAME2 @115106
+        SAY UNIDENTIFIED_DESC @115107
+	SAY DESC @115107
+
+//masterwork materials
+COPY ~%folder%/data/scrolls/B_BPG03.bam~ ~override~  //Scroll kit image
+COPY ~%folder%/data/scrolls/B_BPG03.itm~ ~override~  //blank scroll item
+        SAY NAME1 @115108
+        SAY NAME2 @115108
+        SAY UNIDENTIFIED_DESC @115108
+	SAY DESC @115108
+
+//scroll kits
+ COPY ~%folder%/data/scrolls/B_SCK01.bam~ ~override~  //Scroll kit image
+//scroll kit, posessing standard quality materials (at first)
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK02.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK03.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK04.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK05.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK06.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK07.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK08.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+ COPY ~%folder%/data/scrolls/B_SCK01.itm~ ~override/B_SCK09.itm~ //scroll kit
+        SAY NAME1 @115102
+        SAY NAME2 @115102
+        SAY UNIDENTIFIED_DESC @115103
+	SAY DESC @115103
+
+//scroll kit stores
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK02.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK03.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK04.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK05.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK06.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK07.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK08.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+ COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override/B_SCK09.sto~ //scroll kit 'store'
+    SAY NAME2 @115102
+    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
+
+//candlekeep
+ACTION_IF (FILE_EXISTS_IN_GAME ~INN2616.sto~) BEGIN
+    COPY_EXISTING ~INN2616.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK01" #1 #0 #0 ~IDENTIFIED~ #1
+END
+
+//Pomab's Emporium
+ACTION_IF (FILE_EXISTS_IN_GAME ~EHPOMAB.sto~) BEGIN
+    COPY_EXISTING ~EHPOMAB.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK02" #1 #0 #0 ~IDENTIFIED~ #1
+END
+
+//adv mart
+ACTION_IF (FILE_EXISTS_IN_GAME ~RIBALD.sto~) BEGIN
+    COPY_EXISTING ~RIBALD.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK03" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+//adv mart
+ACTION_IF (FILE_EXISTS_IN_GAME ~RIBALD3.sto~) BEGIN
+    COPY_EXISTING ~RIBALD3.sto~ ~override~
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+//adv mart
+ACTION_IF (FILE_EXISTS_IN_GAME ~EHPOMAB.sto~) BEGIN
+    COPY_EXISTING ~EHPOMAB.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK02" #1 #0 #0 ~IDENTIFIED~ #1
+END
+//Pen and Parchment
+ACTION_IF (FILE_EXISTS_IN_GAME ~SCROLLS.sto~) BEGIN
+    COPY_EXISTING ~SCROLLS.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK04" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+//Arcana Archives
+ACTION_IF (FILE_EXISTS_IN_GAME ~25SPELL.sto~) BEGIN
+    COPY_EXISTING ~25SPELL.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK05" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+ACTION_IF (FILE_EXISTS_IN_GAME ~25SPELL2.sto~) BEGIN
+    COPY_EXISTING ~25SPELL2.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK06" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+//Sorcerous Sundries
+ACTION_IF (FILE_EXISTS_IN_GAME ~STO0703.sto~) BEGIN
+    COPY_EXISTING ~STO0703.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK07" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+//Oswald's Laboratory
+ACTION_IF (FILE_EXISTS_IN_GAME ~STO0703.sto~) BEGIN
+    COPY_EXISTING ~STO0703.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK08" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+//Nym's Exotic Goods
+ACTION_IF (FILE_EXISTS_IN_GAME ~LDD_NYM.sto~) BEGIN
+    COPY_EXISTING ~LDD_NYM.sto~ ~override~
+    ADD_STORE_ITEM "B_SCK08" #1 #0 #0 ~IDENTIFIED~ #1
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #50
+    ADD_STORE_ITEM "B_BPG02" #1 #0 #0 ~IDENTIFIED~ #20
+END
+
+
+//CONTINUE
+//Make scroll kits having better quality materials
+
+//add scroll kits 1-9 to select stores
+
+//add materials to select stores and as loot
+
+END
+
+//CONTINUE integrating materials options
+
+//scroll list
+COPY ~%folder%/lib/scroll_lists/levp_scr.tpa~ ~override~  //the pre list
+//create scroll 2da:
+COPY ~%folder%/data/scrolls/scrcrft.2da~ ~override~  //SCROLL 2da
+
+//////////////////////////////////////////////////////////////////////////
+/////// Step 1: Find all scroll files and create relevant lists
+
+
+
+COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ //copies all itm files
+    PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_BYTE 0x001C type //Item type
+        PATCH_IF (type = 0x000b) BEGIN  //if scroll type
+		READ_LONG  0x64 "abil_off" ELSE 0
+  		READ_SHORT 0x68 "abil_num" ELSE 0
+		READ_LONG  0x6a "fx_off"   ELSE 0
+  		FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
+    		    READ_BYTE ("%abil_off%" + (0x38 * "%index%")) "type"
+		    PATCH_IF ("%type%" = 3) BEGIN // magical
+      			READ_SHORT ("%abil_off%" + 0x1e + (0x38 * "%index%")) "abil_fx_num"
+      			READ_SHORT ("%abil_off%" + 0x20 + (0x38 * "%index%")) "abil_fx_idx"
+      			FOR (index2 = 0 ; index2 < abil_fx_num ; index2 = index2 + 1) BEGIN
+        			READ_SHORT ("%fx_off%" +        (0x30 * ("%abil_fx_idx%" + "%index2%"))) "opcode"
+        			PATCH_IF (("%opcode%" = 146) OR ("%opcode%" = 148)) BEGIN // cast spell
+        			     READ_ASCII ("%fx_off%" + 0x14 + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "resource"
+        			     READ_LONG 0x34 gagold  //anything else we need to know about the scroll itself??? Usability??? Learnability?
+        			     //Create spell to gold list
+                                     INNER_PATCH_SAVE da_spl ~%resource%~ BEGIN  END
+                                     INNER_PATCH_SAVE da_scr ~%SOURCE_RES%~ BEGIN  END
+                                     INNER_PATCH_SAVE gold ~%gagold%~ BEGIN  END
+                                     //compile a list of spls that either are equal to "da_spl" or that use a 146 or 148 to cast "da_spl".
+                                     //first, start with what we know:
+                                     INNER_ACTION BEGIN    //add to the pre list
+                                       COPY_EXISTING ~levp_scr.tpa~ ~override~ //scroll --> spell list
+                                       REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%da_scr%~ => ~%da_spl%~"
+                                     //but no need to refrain from adding these spls to actual list
+                                     COPY ~%folder%/lib/scroll_lists/levg_scr.tpa~ ~%folder%/lib/scroll_lists/levg_scr.tpa~ //scroll --> spell list
+                                     REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%da_spl%~ => ~%da_scr%~"
+                                     //record spell to gold list (ONLY USED IF b_real_scroll_prices IS SET TO 1, but record anyway
+                                         COPY ~%folder%/lib/scroll_lists/scrgold.tpa~ ~%folder%/lib/scroll_lists/scrgold.tpa~ //spell --> gold list
+                                         REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%da_spl%~ => ~%gold%~"
+                                     END //inner action first list
+
+                                END //opcode 146/148
+                        END //for
+                    END //magical type
+               END//for
+        END //scroll type
+    END //source size
+BUT_ONLY
+
+//get the pre list ready to use to create the actual list
+
+INCLUDE ~override/levp_scr.tpa~  //
+
+//second pass at list but only if fnp:
+
+COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
+    PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x0008 ref_num //spell name
+        PATCH_IF (ref_num > 0) BEGIN   //Non empty name
+        LPF RETURN_EFFECT
+            RET
+                have_all
+                the_opcode
+                eff_resource
+                ref
+        END  //return effect
+            PATCH_IF (((the_opcode = 146) OR (the_opcode = 148))        AND
+            (FILE_CONTAINS_EVALUATED(~levp_scr.tpa~ ~%eff_resource%~))) BEGIN
+            //PATCH_PRINT "anybody home? %ref%"
+                      INNER_ACTION BEGIN
+                           ACTION_PHP_EACH the_prelist AS der_scroll => der_spell BEGIN
+                                ACTION_IF ("%der_spell%" STRING_EQUAL_CASE "%eff_resource%") BEGIN
+                                     COPY ~%folder%/lib/scroll_lists/levg_scr.tpa~ ~%folder%/lib/scroll_lists/levg_scr.tpa~ //scroll --> spell list
+                                     REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%ref%~ => ~%der_scroll%~"
+                                END  //der spell and eff resource
+                           END //php
+
+                      END//inner action
+            END //opcode 146 or 148
+
+        END // non empty spl name
+    END//source size
+BUT_ONLY
+
+
+//////////////////////////////////////////////////////////////////////////
+/////// Step 2: Compile 2da with all relevant information
+
+//make scroll to spl list available for php
+INCLUDE ~%folder%/lib/scroll_lists/levg_scr.tpa~
+
+//in case it is needed
+INCLUDE ~%folder%/lib/scroll_lists/scrgold.tpa~
+
+//get all relevant information and add to 2da
+ACTION_PHP_EACH lev_general_scroll AS der_spell => der_scroll  BEGIN
+      //copy over all relevant spls for that particular
+     COPY_EXISTING ~%der_spell%.spl~ ~override~
+     //PATCH_PRINT "copying %der_spell%.spl"
+          PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+          READ_LONG  0x0034 level //spell level
+          //level gold if needed
+               PATCH_IF (level > 0) AND (level < 6) BEGIN
+                    SET level_gold = (%level% * 100)
+               END
+               ELSE PATCH_IF (level = 6) BEGIN
+                    SET level_gold = (1000)
+               END
+               ELSE PATCH_IF (level = 7) BEGIN
+                    SET level_gold = (1500)
+               END
+               ELSE PATCH_IF (level = 8) BEGIN
+                    SET level_gold = (2500)
+               END
+               ELSE PATCH_IF (level = 9) BEGIN
+                    SET level_gold = (5000)
+               END
+               READ_SHORT 0x001c type //spell type
+               READ_STRREF 0x0008 s_name
+               READ_LONG  0x0008 name //name ref
+               READ_LONG  0x0050 desc //description
+               INNER_PATCH_SAVE da_splze ~%SOURCE_RES%~ BEGIN  END
+               //scribe text
+               SPRINT new @115110//new text
+               INNER_ACTION BEGIN
+                    COPY ~%folder%/lib/scroll_lists/scroll_text.tpa~ ~%folder%/lib/scroll_lists/scroll_text.tpa~ //spl --> text
+                        REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%der_spell%~ => ~%new%~"
+               END
+                   PATCH_IF (type = %b_scroll_craft_type%) OR (%b_scroll_craft_type% > 2) BEGIN
+                        //gold and xp check
+                        PATCH_IF (%b_real_scroll_prices% = 1) BEGIN //if real scroll prices
+                          INNER_ACTION BEGIN
+                                  ACTION_PHP_EACH spell_to_gold AS za_spell => za_gold  BEGIN
+                                        ACTION_IF ("%za_spell%" STRING_EQUAL_CASE "%da_splze%") BEGIN
+                                             OUTER_SPRINT ~level_gold~ ~%za_gold%~
+                                        END
+                                  END//php
+                          END //inner action
+                        END //real scroll is level_gold if set, otherwise is the defaults above
+                        PATCH_IF (type = %b_xp_scroll_cost%) OR (%b_xp_scroll_cost% > 2) BEGIN
+                             SET new_gold = (%level_gold% / 2)
+                                 PATCH_IF (level > 0) AND (level < 4)BEGIN
+                                     SET xp_cost = (level * 6)
+                                 END
+                                 ELSE PATCH_IF (level > 3) AND (level < 7)BEGIN
+                                     SET xp_cost = (level * 10)
+                                 END
+                                 ELSE PATCH_IF (level > 6) BEGIN
+                                     SET xp_cost = (level * 16)
+                                 END
+                        END
+                        ELSE BEGIN //not right spell type for reduced gold cost (either because no xp cost or not applicable to spell type)
+                               SET new_gold = (%level_gold%)
+                               SET xp_cost = (0)
+                        END
+                        //now, materials check CONTINUE
+                        PATCH_IF (type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2) BEGIN
+                             SET final_gold = (%new_gold% / 2)  //set final gold cost for this scroll
+                             SET materials = (1)
+                        END//end materials yes
+                        ELSE BEGIN  //if no materials reduced gold cost
+                             SET final_gold = (%new_gold%)      //set final gold cost for this scroll
+                             SET materials = (0)
+                        END
+                        //fail check
+                        PATCH_IF (type = 1) BEGIN //arcane type
+                             SET can_fail = (%b_scroll_failure_arcane%)
+                        END
+                        ELSE PATCH_IF (type = 2) BEGIN //divine type
+                             SET can_fail = (%b_scroll_failure_divine%)
+                        END
+                        //apply final product to 2da
+                        INNER_ACTION BEGIN
+                             APPEND ~scrcrft.2da~ ~B_%der_spell%%TAB%%type%%TAB%%name%%TAB%%desc%%TAB%%der_scroll%%TAB%%der_spell%%TAB%%final_gold%%TAB%%level%%TAB%%materials%%TAB%%xp_cost%%TAB%%can_fail%~  //current hp Greater than
+                        END
+                   END//type check
+         END//source size
+     BUT_ONLY
+END //php
+
+//////////////////////////////////////////////////////////////////////////
+/////// Step 3: Create the dialog from 2da and creation variables
+
+//for text
+INCLUDE ~%folder%/lib/scroll_lists/scroll_text.tpa~
+
+COPY_EXISTING ~SCRCRFT.2da~ ~override~
+	READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 1; row < kitlist; ++row) BEGIN //
+			             READ_2DA_ENTRY_FORMER kitlist row 1 scroll_type
+			             READ_2DA_ENTRY_FORMER kitlist row 2 name_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 3 desc_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 4 scroll_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 5 spell_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 6 cost
+			             READ_2DA_ENTRY_FORMER kitlist row 7 level
+			             READ_2DA_ENTRY_FORMER kitlist row 8 material_cost
+			             READ_2DA_ENTRY_FORMER kitlist row 9 xp_cost
+			             READ_2DA_ENTRY_FORMER kitlist row 10 can_fail
+			             SET 1_gold = (%cost% - 1)
+			             SET 1_xp = (%xp_cost% - 1)
+			             INNER_ACTION BEGIN
+                                          ACTION_PHP_EACH scroll_text AS spellra => textra BEGIN
+                                                ACTION_IF ("%spellra%" STRING_EQUAL_CASE "%spell_ref%") BEGIN
+                                                     //PRINT "%spellra% matches with %spell_ref%"
+                                                     OUTER_SPRINT ~texta~ ~%textra%~
+                                                END
+                                          END
+			             END
+			             PATCH_IF (level = 1) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115006)
+			             END
+			             PATCH_IF (level = 2) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115007)
+			             END
+			             PATCH_IF (level = 3) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115008)
+			             END
+			             PATCH_IF (level = 4) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115009)
+			             END
+			             PATCH_IF (level = 5) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115010)
+			             END
+			             PATCH_IF (level = 6) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115011)
+			             END
+			             PATCH_IF (level = 7) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115012)
+			             END
+			             PATCH_IF (level = 8) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115013)
+			             END
+			             PATCH_IF (level = 9) AND (scroll_type = 1) BEGIN
+			                 SET refnum = (115014)
+			             END
+
+                                     PATCH_IF (level = 1) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115118)
+			             END
+			             PATCH_IF (level = 2) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115119)
+			             END
+			             PATCH_IF (level = 3) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115120)
+			             END
+			             PATCH_IF (level = 4) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115121)
+			             END
+			             PATCH_IF (level = 5) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115122)
+			             END
+			             PATCH_IF (level = 6) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115123)
+			             END
+			             PATCH_IF (level = 7) AND (scroll_type = 2) BEGIN
+			                 SET refnum = (115124)
+			             END
+                                     INNER_ACTION BEGIN
+                                               COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
+                                                   REPLACE_TEXTUALLY "@%refnum%" "@%refnum%
+IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%cost%) DestroyGold(%cost%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
+                                                   PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
+                                                       REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,%1_xp%)~
+                                                       REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01", myself)~
+                                                   END
+                                                   REPLACE_TEXTUALLY ~THE_SPELL~ ~"%spell_ref%"~
+                                                   REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%scroll_ref%"~
+                                                   REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"%texta%"~
+                                      END
+			              //
+
+		END
+BUT_ONLY
+
+//random but 1 time adjustments for scroll creation dialog: real prices
+COPY_EXISTING ~SCRCRFT.2da~ ~override~
+			             SET lowest_arcane_gold_1 = 100
+			             SET lowest_arcane_gold_2 = 200
+			             SET lowest_arcane_gold_3 = 300
+			             SET lowest_arcane_gold_4 = 400
+			             SET lowest_arcane_gold_5 = 500
+			             SET lowest_arcane_gold_6 = 1000
+			             SET lowest_arcane_gold_7 = 1500
+			             SET lowest_arcane_gold_8 = 2500
+			             SET lowest_arcane_gold_9 = 5000
+			             SET lowest_divine_gold_1 = 100
+			             SET lowest_divine_gold_2 = 200
+			             SET lowest_divine_gold_3 = 300
+			             SET lowest_divine_gold_4 = 400
+			             SET lowest_divine_gold_5 = 500
+			             SET lowest_divine_gold_6 = 1000
+			             SET lowest_divine_gold_7 = 1500
+			             SET lowest_divine_gold_8 = 2500  //just in case...
+			             SET lowest_divine_gold_9 = 5000  //just in case...
+			             //now xp stuff
+			             PATCH_IF (%b_xp_scroll_cost% = 1) OR (%b_xp_scroll_cost% > 2) BEGIN  //at least arcane
+			                      SET lowest_arcane_xp_1 = 5
+			                      SET lowest_arcane_xp_2 = 11
+			                      SET lowest_arcane_xp_3 = 17
+			                      SET lowest_arcane_xp_4 = 39
+			                      SET lowest_arcane_xp_5 = 49
+			                      SET lowest_arcane_xp_6 = 59
+			                      SET lowest_arcane_xp_7 = 111
+			                      SET lowest_arcane_xp_8 = 127
+			                      SET lowest_arcane_xp_9 = 143
+                                     END
+			             PATCH_IF (%b_xp_scroll_cost% = 2) OR (%b_xp_scroll_cost% > 2) BEGIN  //at least arcane
+			                      SET lowest_divine_xp_1 = 5
+			                      SET lowest_divine_xp_2 = 11
+			                      SET lowest_divine_xp_3 = 17
+			                      SET lowest_divine_xp_4 = 39
+			                      SET lowest_divine_xp_5 = 49
+			                      SET lowest_divine_xp_6 = 59
+			                      SET lowest_divine_xp_7 = 111
+			                      SET lowest_divine_xp_8 = 127    //in case
+			                      SET lowest_divine_xp_9 = 143    //in case
+                                     END
+	READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 1; row < kitlist; ++row) BEGIN //
+			             READ_2DA_ENTRY_FORMER kitlist row 1 scroll_type
+			             READ_2DA_ENTRY_FORMER kitlist row 2 name_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 3 desc_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 4 scroll_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 5 spell_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 6 cost
+			             READ_2DA_ENTRY_FORMER kitlist row 7 level
+			             READ_2DA_ENTRY_FORMER kitlist row 8 material_cost
+			             READ_2DA_ENTRY_FORMER kitlist row 9 xp_cost
+			             READ_2DA_ENTRY_FORMER kitlist row 10 can_fail
+			             PATCH_IF (%b_real_scroll_prices% > 0) AND (%scroll_type% = 1) BEGIN  //arcane first
+			               PATCH_IF (%level% = 1) AND (%cost% < %lowest_arcane_gold_1%) BEGIN
+                                          SET lowest_arcane_gold_1 = (%cost%)
+			               END
+			               PATCH_IF (level = 2) AND (%cost% < %lowest_arcane_gold_2%) BEGIN
+                                          SET lowest_arcane_gold_2 = (%cost%)
+			               END
+			               PATCH_IF (level = 3) AND (%cost% < %lowest_arcane_gold_3%) BEGIN
+                                          SET lowest_arcane_gold_3 = (%cost%)
+			               END
+			               PATCH_IF (level = 4) AND (%cost% < %lowest_arcane_gold_4%) BEGIN
+                                          SET lowest_arcane_gold_4 = (%cost%)
+			               END
+			               PATCH_IF (level = 5) AND (%cost% < %lowest_arcane_gold_5%) BEGIN
+                                          SET lowest_arcane_gold_5 = (%cost%)
+			               END
+			               PATCH_IF (level = 6) AND (%cost% < %lowest_arcane_gold_6%) BEGIN
+                                          SET lowest_arcane_gold_6 = (%cost%)
+			               END
+			               PATCH_IF (level = 7) AND (%cost% < %lowest_arcane_gold_7%) BEGIN
+                                          SET lowest_arcane_gold_7 = (%cost%)
+			               END
+			               PATCH_IF (level = 8) AND (%cost% < %lowest_arcane_gold_8%) BEGIN
+                                          SET lowest_arcane_gold_8 = (%cost%)
+			               END
+			               PATCH_IF (level = 9) AND (%cost% < %lowest_arcane_gold_9%) BEGIN
+                                          SET lowest_arcane_gold_9 = (%cost%)
+			               END
+			             END   //end b_real_scroll_prices
+			             PATCH_IF (%b_real_scroll_prices% > 0) AND (%scroll_type% = 2) BEGIN  //divine
+			               PATCH_IF (%level% = 1) AND (%cost% < %lowest_divine_gold_1%) BEGIN
+                                          SET lowest_divine_gold_1 = (%cost%)
+			               END
+			               PATCH_IF (level = 2) AND (%cost% < %lowest_divine_gold_2%) BEGIN
+                                          SET lowest_divine_gold_2 = (%cost%)
+			               END
+			               PATCH_IF (level = 3) AND (%cost% < %lowest_divine_gold_3%) BEGIN
+                                          SET lowest_divine_gold_3 = (%cost%)
+			               END
+			               PATCH_IF (level = 4) AND (%cost% < %lowest_divine_gold_4%) BEGIN
+                                          SET lowest_divine_gold_4 = (%cost%)
+			               END
+			               PATCH_IF (level = 5) AND (%cost% < %lowest_divine_gold_5%) BEGIN
+                                          SET lowest_divine_gold_5 = (%cost%)
+			               END
+			               PATCH_IF (level = 6) AND (%cost% < %lowest_divine_gold_6%) BEGIN
+                                          SET lowest_divine_gold_6 = (%cost%)
+			               END
+			               PATCH_IF (level = 7) AND (%cost% < %lowest_divine_gold_7%) BEGIN
+                                          SET lowest_divine_gold_7 = (%cost%)
+			               END
+			               PATCH_IF (level = 8) AND (%cost% < %lowest_divine_gold_8%) BEGIN
+                                          SET lowest_divine_gold_8 = (%cost%)
+			               END
+			               PATCH_IF (level = 9) AND (%cost% < %lowest_divine_gold_9%) BEGIN
+                                          SET lowest_divine_gold_9 = (%cost%)
+			               END
+			             END   //end b_real_scroll_prices
+                END
+		SET lowest_arcane_1 = (%lowest_arcane_gold_1%)
+		SET lowest_arcane_2 = (%lowest_arcane_gold_2%)
+		SET lowest_arcane_3 = (%lowest_arcane_gold_3%)
+		SET lowest_arcane_4 = (%lowest_arcane_gold_4%)
+		SET lowest_arcane_5 = (%lowest_arcane_gold_5%)
+		SET lowest_arcane_6 = (%lowest_arcane_gold_6%)
+		SET lowest_arcane_7 = (%lowest_arcane_gold_7%)
+		SET lowest_arcane_8 = (%lowest_arcane_gold_8%)
+		SET lowest_arcane_9 = (%lowest_arcane_gold_9%)
+                SET lowest_divine_1 = (%lowest_divine_gold_1%)
+                SET lowest_divine_2 = (%lowest_divine_gold_2%)
+                SET lowest_divine_3 = (%lowest_divine_gold_3%)
+                SET lowest_divine_4 = (%lowest_divine_gold_4%)
+                SET lowest_divine_5 = (%lowest_divine_gold_5%)
+                SET lowest_divine_6 = (%lowest_divine_gold_6%)
+                SET lowest_divine_7 = (%lowest_divine_gold_7%)
+
+		SET lowest_arcane_gold_1 = (%lowest_arcane_gold_1% - 1)
+		SET lowest_arcane_gold_2 = (%lowest_arcane_gold_2% - 1)
+		SET lowest_arcane_gold_3 = (%lowest_arcane_gold_3% - 1)
+		SET lowest_arcane_gold_4 = (%lowest_arcane_gold_4% - 1)
+		SET lowest_arcane_gold_5 = (%lowest_arcane_gold_5% - 1)
+		SET lowest_arcane_gold_6 = (%lowest_arcane_gold_6% - 1)
+		SET lowest_arcane_gold_7 = (%lowest_arcane_gold_7% - 1)
+		SET lowest_arcane_gold_8 = (%lowest_arcane_gold_8% - 1)
+		SET lowest_arcane_gold_9 = (%lowest_arcane_gold_9% - 1)
+		SET lowest_divine_gold_1 = (%lowest_divine_gold_1% - 1)
+		SET lowest_divine_gold_2 = (%lowest_divine_gold_2% - 1)
+		SET lowest_divine_gold_3 = (%lowest_divine_gold_3% - 1)
+		SET lowest_divine_gold_4 = (%lowest_divine_gold_4% - 1)
+		SET lowest_divine_gold_5 = (%lowest_divine_gold_5% - 1)
+		SET lowest_divine_gold_6 = (%lowest_divine_gold_6% - 1)
+		SET lowest_divine_gold_7 = (%lowest_divine_gold_7% - 1)
+		SET lowest_divine_gold_8 = (%lowest_divine_gold_8% - 1)
+		SET lowest_divine_gold_9 = (%lowest_divine_gold_9% - 1)
+BUT_ONLY
+
+ACTION_IF (%b_xp_scroll_cost% = 1) OR (%b_xp_scroll_cost% > 2) BEGIN //at least arcane xp
+    OUTER_SPRINT ~lowest_arcane_1~ ~6 xp and %lowest_arcane_1%~
+    OUTER_SPRINT ~lowest_arcane_2~ ~12 xp and %lowest_arcane_2%~
+    OUTER_SPRINT ~lowest_arcane_3~ ~18 xp and %lowest_arcane_3%~
+    OUTER_SPRINT ~lowest_arcane_4~ ~40 xp and %lowest_arcane_4%~
+    OUTER_SPRINT ~lowest_arcane_5~ ~50 xp and %lowest_arcane_5%~
+    OUTER_SPRINT ~lowest_arcane_6~ ~60 xp and %lowest_arcane_6%~
+    OUTER_SPRINT ~lowest_arcane_7~ ~112 xp and %lowest_arcane_7%~
+    OUTER_SPRINT ~lowest_arcane_8~ ~128 xp and %lowest_arcane_8%~
+    OUTER_SPRINT ~lowest_arcane_9~ ~144 xp and %lowest_arcane_9%~
+END
+ACTION_IF (%b_xp_scroll_cost% = 2) OR (%b_xp_scroll_cost% > 2) BEGIN //at least divine xp
+    OUTER_SPRINT ~lowest_divine_1~ ~6 xp and %lowest_divine_1%~
+    OUTER_SPRINT ~lowest_divine_1~ ~12 xp and %lowest_divine_1%~
+    OUTER_SPRINT ~lowest_divine_1~ ~18 xp and %lowest_divine_1%~
+    OUTER_SPRINT ~lowest_divine_1~ ~40 xp and %lowest_divine_1%~
+    OUTER_SPRINT ~lowest_divine_1~ ~50 xp and %lowest_divine_1%~
+    OUTER_SPRINT ~lowest_divine_1~ ~60 xp and %lowest_divine_1%~
+    OUTER_SPRINT ~lowest_divine_1~ ~112 xp and %lowest_divine_1%~
+END
+
+ACTION_IF (%b_xp_scroll_cost% = 1) OR (%b_xp_scroll_cost% > 2) BEGIN
+ COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //  lowest_divine_xp_1
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_1)" "PartyGoldGT(ARCANE_GOLD_1) XPGT(myself,%lowest_arcane_xp_1%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_2)" "PartyGoldGT(ARCANE_GOLD_2) XPGT(myself,%lowest_arcane_xp_2%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_3)" "PartyGoldGT(ARCANE_GOLD_3) XPGT(myself,%lowest_arcane_xp_3%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_4)" "PartyGoldGT(ARCANE_GOLD_4) XPGT(myself,%lowest_arcane_xp_4%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_5)" "PartyGoldGT(ARCANE_GOLD_5) XPGT(myself,%lowest_arcane_xp_5%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_6)" "PartyGoldGT(ARCANE_GOLD_6) XPGT(myself,%lowest_arcane_xp_6%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_7)" "PartyGoldGT(ARCANE_GOLD_7) XPGT(myself,%lowest_arcane_xp_7%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_8)" "PartyGoldGT(ARCANE_GOLD_8) XPGT(myself,%lowest_arcane_xp_8%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(ARCANE_GOLD_9)" "PartyGoldGT(ARCANE_GOLD_9) XPGT(myself,%lowest_arcane_xp_9%)"
+END
+ACTION_IF (%b_xp_scroll_cost% = 2) OR (%b_xp_scroll_cost% > 2) BEGIN
+ COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //  lowest_divine_xp_1
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_1)" "PartyGoldGT(DIVINE_GOLD_1) XPGT(myself,%lowest_divine_xp_1%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_2)" "PartyGoldGT(DIVINE_GOLD_2) XPGT(myself,%lowest_divine_xp_2%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_3)" "PartyGoldGT(DIVINE_GOLD_3) XPGT(myself,%lowest_divine_xp_3%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_4)" "PartyGoldGT(DIVINE_GOLD_4) XPGT(myself,%lowest_divine_xp_4%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_5)" "PartyGoldGT(DIVINE_GOLD_5) XPGT(myself,%lowest_divine_xp_5%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_6)" "PartyGoldGT(DIVINE_GOLD_6) XPGT(myself,%lowest_divine_xp_6%)"
+    REPLACE_TEXTUALLY "PartyGoldGT(DIVINE_GOLD_7)" "PartyGoldGT(DIVINE_GOLD_7) XPGT(myself,%lowest_divine_xp_7%)"
+END
+
+
+
+
+   COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //  lowest_divine_xp_1
+    //initial reply text
+    //divine gold
+     SPRINT newdiv1 @115111 //new text
+     SPRINT newdiv2 @115112 //new text
+     SPRINT newdiv3 @115113 //new text
+     SPRINT newdiv4 @115114 //new text
+     SPRINT newdiv5 @115115 //new text
+     SPRINT newdiv6 @115116 //new text
+     SPRINT newdiv7 @115117 //new text
+    //arcane gold
+     SPRINT newarc1 @115020 //new text
+     SPRINT newarc2 @115021 //new text
+     SPRINT newarc3 @115022 //new text
+     SPRINT newarc4 @115023 //new text
+     SPRINT newarc5 @115024 //new text
+     SPRINT newarc6 @115025 //new text
+     SPRINT newarc7 @115026 //new text
+     SPRINT newarc8 @115027 //new text
+     SPRINT newarc9 @115028 //new text
+//arcane text
+      REPLACE_TEXTUALLY ~ARCANE_REPLY1~ ~"%newarc1%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY2~ ~"%newarc2%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY3~ ~"%newarc3%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY4~ ~"%newarc4%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY5~ ~"%newarc5%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY6~ ~"%newarc6%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY7~ ~"%newarc7%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY8~ ~"%newarc8%"~
+      REPLACE_TEXTUALLY ~ARCANE_REPLY9~ ~"%newarc9%"~
+
+      REPLACE_TEXTUALLY "ARCANE_GOLD_1" "%lowest_arcane_gold_1%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_2" "%lowest_arcane_gold_2%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_3" "%lowest_arcane_gold_3%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_4" "%lowest_arcane_gold_4%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_5" "%lowest_arcane_gold_5%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_6" "%lowest_arcane_gold_6%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_7" "%lowest_arcane_gold_7%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_8" "%lowest_arcane_gold_8%"
+      REPLACE_TEXTUALLY "ARCANE_GOLD_9" "%lowest_arcane_gold_9%"
+//divine text
+      REPLACE_TEXTUALLY ~DIVINE_REPLY1~ ~"%newdiv1%"~
+      REPLACE_TEXTUALLY ~DIVINE_REPLY2~ ~"%newdiv2%"~
+      REPLACE_TEXTUALLY ~DIVINE_REPLY3~ ~"%newdiv3%"~
+      REPLACE_TEXTUALLY ~DIVINE_REPLY4~ ~"%newdiv4%"~
+      REPLACE_TEXTUALLY ~DIVINE_REPLY5~ ~"%newdiv5%"~
+      REPLACE_TEXTUALLY ~DIVINE_REPLY6~ ~"%newdiv6%"~
+      REPLACE_TEXTUALLY ~DIVINE_REPLY7~ ~"%newdiv7%"~
+
+      REPLACE_TEXTUALLY "DIVINE_GOLD_1" "%lowest_divine_gold_1%"
+      REPLACE_TEXTUALLY "DIVINE_GOLD_2" "%lowest_divine_gold_2%"
+      REPLACE_TEXTUALLY "DIVINE_GOLD_3" "%lowest_divine_gold_3%"
+      REPLACE_TEXTUALLY "DIVINE_GOLD_4" "%lowest_divine_gold_4%"
+      REPLACE_TEXTUALLY "DIVINE_GOLD_5" "%lowest_divine_gold_5%"
+      REPLACE_TEXTUALLY "DIVINE_GOLD_6" "%lowest_divine_gold_6%"
+      REPLACE_TEXTUALLY "DIVINE_GOLD_7" "%lowest_divine_gold_7%"
+
+
+
+
+/*
+
+//Now random but 1 time adjustments for scroll creation dialog: xp reduction
+
+COPY_EXISTING ~SCRCRFT.2da~ ~override~
+	READ_2DA_ENTRIES_NOW kitlist 3
+		FOR (row = 1; row < kitlist; ++row) BEGIN //
+			             READ_2DA_ENTRY_FORMER kitlist row 1 scroll_type
+			             READ_2DA_ENTRY_FORMER kitlist row 2 name_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 3 desc_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 4 scroll_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 5 spell_ref
+			             READ_2DA_ENTRY_FORMER kitlist row 6 cost
+			             READ_2DA_ENTRY_FORMER kitlist row 7 level
+			             READ_2DA_ENTRY_FORMER kitlist row 8 material_cost
+			             READ_2DA_ENTRY_FORMER kitlist row 9 xp_cost
+			             READ_2DA_ENTRY_FORMER kitlist row 10 can_fail
+			             SET lowest_arcane_gold_1 = (%lowest_gold_1%)
+			             SET lowest_arcane_gold_2 = (%lowest_gold_2%)
+			             SET lowest_arcane_gold_3 = (%lowest_gold_3%)
+			             SET lowest_arcane_gold_4 = (%lowest_gold_4%)
+			             SET lowest_arcane_gold_5 = (%lowest_gold_5%)
+			             SET lowest_arcane_gold_6 = (%lowest_gold_6%)
+			             SET lowest_arcane_gold_7 = (%lowest_gold_7%)
+			             SET lowest_arcane_gold_8 = (%lowest_gold_8%)
+			             SET lowest_arcane_gold_9 = (%lowest_gold_9%)
+			             SET lowest_divine_gold_1 = (%lowest_gold_1%)
+			             SET lowest_divine_gold_2 = (%lowest_gold_2%)
+			             SET lowest_divine_gold_3 = (%lowest_gold_3%)
+			             SET lowest_divine_gold_4 = (%lowest_gold_4%)
+			             SET lowest_divine_gold_5 = (%lowest_gold_5%)
+			             SET lowest_divine_gold_6 = (%lowest_gold_6%)
+			             SET lowest_divine_gold_7 = (%lowest_gold_7%)
+			             SET lowest_divine_gold_8 = (%lowest_gold_8%) //just in case(?)
+			             SET lowest_divine_gold_9 = (%lowest_gold_9%) //just in case(?)
+                                     PATCH_IF (%scroll_type% = %b_xp_scroll_cost%) OR (%b_xp_scroll_cost% > 2) BEGIN
+                                         PATCH_IF (%scroll_type% = 1) AND (%level% = 1) BEGIN
+                                           
+                                         END
+                                     END  //xp price reduction
+                END
+BUT_ONLY
+
+COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~
+
+
+
+
+			             PATCH_IF class = 1 AND (%b_mage_scroll% > 0) BEGIN //if mage
+
+                                     END
+
+//1st level spells @115006
+ACTION_PHP_EACH lev1_scroll AS zee_spell => zee_scroll BEGIN
+  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
+   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
+            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
+               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
+                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
+               END
+            END
+    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
+    SET 1_gold = (%ga_gold% - 1)
+      REPLACE_TEXTUALLY "@115006" "@115006
+IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
+      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
+          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,5)~
+          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01", myself)~
+      END
+      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
+      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
+      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
+    END //spell name is equal
+  END   //php
+END     //php
+
 //copy over all lev based tpas
 COPY ~%folder%/lib/scroll_lists/lev1_scr.tpa~ ~override~  //lev 1 scr
 COPY ~%folder%/lib/scroll_lists/lev2_scr.tpa~ ~override~  //lev 2 scr
@@ -65,9 +907,9 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ //copies all itm files
         			            SET new_gold = (%gold% / 2)
         			            //PATCH_PRINT "What is %new_gold%? Should be 1/2 %gold%."
         			          INNER_ACTION BEGIN
-		                               COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                  REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
+        			          //CONTINUE!!!!!!
+		                               COPY_EXISTING ~%da_spl%.spl~ ~override~
+
         			          END
         			       END
                                        ELSE PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 1) BEGIN //set new_gold if xp gold reduction
@@ -1007,3 +1849,5 @@ ACTION_IF (%b_mage_scroll% = 0) OR
           END//special rogue/monk stuff
 
 END //at least somebody getting scribe scroll as hla
+
+*/

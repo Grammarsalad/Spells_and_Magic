@@ -1,0 +1,26 @@
+//special thanks to Subtledoctor and Aquadrizzt for this code
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY scroll_exclude_list BEGIN
+
+
+END
+
+// This code is copied from Mike1072's armor_list.tpa file. 
+// WeiDU is now on my hate list as well - Yaro, 7/26
+
+/*
+extra spls to exclude
+KELDORN
+OHBGLOV1
+DGRIGHT
+OHPRGD10
+OHDXDIS
+SENSPIHE
+SPYANCD
+CDPR417
+DGFAITH
+DGARCHON
+DEVAHEAL
+SPJA01
+DW#FPPLO
+*/
