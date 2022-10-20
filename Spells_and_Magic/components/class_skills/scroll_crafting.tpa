@@ -226,7 +226,6 @@ END
 
 END
 
-//CONTINUE integrating materials options
 
 //scroll list
 COPY ~%folder%/lib/scroll_lists/levp_scr.tpa~ ~override~  //the pre list
@@ -336,23 +335,56 @@ ACTION_PHP_EACH lev_general_scroll AS der_spell => der_scroll  BEGIN
      //PATCH_PRINT "copying %der_spell%.spl"
           PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
           READ_LONG  0x0034 level //spell level
-          //level gold if needed
+          READ_SHORT 0x001c type //spell type
+          //level gold if needed and materials
                PATCH_IF (level > 0) AND (level < 6) BEGIN
                     SET level_gold = (%level% * 100)
+                        PATCH_IF (level < 4) AND ((type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2)) BEGIN
+                             SET materials = (1)
+                        END
+                        ELSE PATCH_IF (level < 3) AND ((type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2)) BEGIN
+                             SET materials = (2)
+                        END
+                        ELSE BEGIN
+                             SET materials = (0)
+                        END
                END
                ELSE PATCH_IF (level = 6) BEGIN
                     SET level_gold = (1000)
+                        PATCH_IF (type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2) BEGIN
+                             SET materials = (2)
+                        END
+                        ELSE BEGIN
+                             SET materials = (0)
+                        END
                END
                ELSE PATCH_IF (level = 7) BEGIN
                     SET level_gold = (1500)
+                        PATCH_IF (type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2) BEGIN
+                             SET materials = (3)
+                        END
+                        ELSE BEGIN
+                             SET materials = (0)
+                        END
                END
                ELSE PATCH_IF (level = 8) BEGIN
                     SET level_gold = (2500)
+                        PATCH_IF (type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2) BEGIN
+                             SET materials = (3)
+                        END
+                        ELSE BEGIN
+                             SET materials = (0)
+                        END
                END
                ELSE PATCH_IF (level = 9) BEGIN
                     SET level_gold = (5000)
+                        PATCH_IF (type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2) BEGIN
+                             SET materials = (3)
+                        END
+                        ELSE BEGIN
+                             SET materials = (0)
+                        END
                END
-               READ_SHORT 0x001c type //spell type
                READ_STRREF 0x0008 s_name
                READ_LONG  0x0008 name //name ref
                READ_LONG  0x0050 desc //description
@@ -394,11 +426,9 @@ ACTION_PHP_EACH lev_general_scroll AS der_spell => der_scroll  BEGIN
                         //now, materials check CONTINUE
                         PATCH_IF (type = %b_material_scroll_cost%) OR (%b_material_scroll_cost% > 2) BEGIN
                              SET final_gold = (%new_gold% / 2)  //set final gold cost for this scroll
-                             SET materials = (1)
                         END//end materials yes
                         ELSE BEGIN  //if no materials reduced gold cost
                              SET final_gold = (%new_gold%)      //set final gold cost for this scroll
-                             SET materials = (0)
                         END
                         //fail check
                         PATCH_IF (type = 1) BEGIN //arcane type
@@ -415,6 +445,8 @@ ACTION_PHP_EACH lev_general_scroll AS der_spell => der_scroll  BEGIN
          END//source size
      BUT_ONLY
 END //php
+
+//CONTINUE integrating materials options materials = 0 (none), 1 (basic quality), 2 (quality), 3 (masterwork)
 
 //////////////////////////////////////////////////////////////////////////
 /////// Step 3: Create the dialog from 2da and creation variables
