@@ -467,8 +467,18 @@ COPY_EXISTING ~SCRCRFT.2da~ ~override~
 			             READ_2DA_ENTRY_FORMER kitlist row 8 material_cost
 			             READ_2DA_ENTRY_FORMER kitlist row 9 xp_cost
 			             READ_2DA_ENTRY_FORMER kitlist row 10 can_fail
+			             PATCH_IF (material_cost = 1) BEGIN
+			                SET materialz = (1)
+			             END
+                                     ELSE PATCH_IF (material_cost = 2) BEGIN
+			                SET materialz = (2)
+                                     END
+                                     ELSE PATCH_IF (material_cost = 3) BEGIN
+			                SET materialz = (3)
+                                     END
 			             SET 1_gold = (%cost% - 1)
 			             SET 1_xp = (%xp_cost% - 1)
+			             SET 1_level = (%level% - 1)
 			             INNER_ACTION BEGIN
                                           ACTION_PHP_EACH scroll_text AS spellra => textra BEGIN
                                                 ACTION_IF ("%spellra%" STRING_EQUAL_CASE "%spell_ref%") BEGIN
@@ -530,9 +540,13 @@ COPY_EXISTING ~SCRCRFT.2da~ ~override~
                                                COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
                                                    REPLACE_TEXTUALLY "@%refnum%" "@%refnum%
 IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%cost%) DestroyGold(%cost%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-                                                   PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
+                                                   PATCH_IF (%b_xp_scroll_cost% = %scroll_type%) OR (%b_xp_scroll_cost% > 2) BEGIN
                                                        REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,%1_xp%)~
-                                                       REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01", myself)~
+                                                       REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01",myself)~
+                                                   END
+                                                   PATCH_IF (%b_material_scroll_cost% = %scroll_type%) OR (%b_material_scroll_cost% > 2) BEGIN
+                                                       REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) NumItemsGT(B_BPG0%materialz%,myself,%1_level%)~
+                                                       REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) TakePartyItemNum("B_BPG0%materialz%",%level%) DestroyItem("B_BPG0%materialz%")~
                                                    END
                                                    REPLACE_TEXTUALLY ~THE_SPELL~ ~"%spell_ref%"~
                                                    REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%scroll_ref%"~
