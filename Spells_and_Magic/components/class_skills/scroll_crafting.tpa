@@ -1,3 +1,6 @@
+
+//CONTINUE THIEF AND MONK SCROLLS
+
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 //////////////////
@@ -545,7 +548,7 @@ IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER D
                                                        REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01",myself)~
                                                    END
                                                    PATCH_IF (%b_material_scroll_cost% = %scroll_type%) OR (%b_material_scroll_cost% > 2) BEGIN
-                                                       REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) NumItemsGT(B_BPG0%materialz%,myself,%1_level%)~
+                                                       REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) NumItemsGT("B_BPG0%materialz%",myself,%1_level%)~
                                                        REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) TakePartyItemNum("B_BPG0%materialz%",%level%) DestroyItem("B_BPG0%materialz%")~
                                                    END
                                                    REPLACE_TEXTUALLY ~THE_SPELL~ ~"%spell_ref%"~
@@ -814,685 +817,6 @@ END
 
 
 
-
-/*
-
-//Now random but 1 time adjustments for scroll creation dialog: xp reduction
-
-COPY_EXISTING ~SCRCRFT.2da~ ~override~
-	READ_2DA_ENTRIES_NOW kitlist 3
-		FOR (row = 1; row < kitlist; ++row) BEGIN //
-			             READ_2DA_ENTRY_FORMER kitlist row 1 scroll_type
-			             READ_2DA_ENTRY_FORMER kitlist row 2 name_ref
-			             READ_2DA_ENTRY_FORMER kitlist row 3 desc_ref
-			             READ_2DA_ENTRY_FORMER kitlist row 4 scroll_ref
-			             READ_2DA_ENTRY_FORMER kitlist row 5 spell_ref
-			             READ_2DA_ENTRY_FORMER kitlist row 6 cost
-			             READ_2DA_ENTRY_FORMER kitlist row 7 level
-			             READ_2DA_ENTRY_FORMER kitlist row 8 material_cost
-			             READ_2DA_ENTRY_FORMER kitlist row 9 xp_cost
-			             READ_2DA_ENTRY_FORMER kitlist row 10 can_fail
-			             SET lowest_arcane_gold_1 = (%lowest_gold_1%)
-			             SET lowest_arcane_gold_2 = (%lowest_gold_2%)
-			             SET lowest_arcane_gold_3 = (%lowest_gold_3%)
-			             SET lowest_arcane_gold_4 = (%lowest_gold_4%)
-			             SET lowest_arcane_gold_5 = (%lowest_gold_5%)
-			             SET lowest_arcane_gold_6 = (%lowest_gold_6%)
-			             SET lowest_arcane_gold_7 = (%lowest_gold_7%)
-			             SET lowest_arcane_gold_8 = (%lowest_gold_8%)
-			             SET lowest_arcane_gold_9 = (%lowest_gold_9%)
-			             SET lowest_divine_gold_1 = (%lowest_gold_1%)
-			             SET lowest_divine_gold_2 = (%lowest_gold_2%)
-			             SET lowest_divine_gold_3 = (%lowest_gold_3%)
-			             SET lowest_divine_gold_4 = (%lowest_gold_4%)
-			             SET lowest_divine_gold_5 = (%lowest_gold_5%)
-			             SET lowest_divine_gold_6 = (%lowest_gold_6%)
-			             SET lowest_divine_gold_7 = (%lowest_gold_7%)
-			             SET lowest_divine_gold_8 = (%lowest_gold_8%) //just in case(?)
-			             SET lowest_divine_gold_9 = (%lowest_gold_9%) //just in case(?)
-                                     PATCH_IF (%scroll_type% = %b_xp_scroll_cost%) OR (%b_xp_scroll_cost% > 2) BEGIN
-                                         PATCH_IF (%scroll_type% = 1) AND (%level% = 1) BEGIN
-                                           
-                                         END
-                                     END  //xp price reduction
-                END
-BUT_ONLY
-
-COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~
-
-
-
-
-			             PATCH_IF class = 1 AND (%b_mage_scroll% > 0) BEGIN //if mage
-
-                                     END
-
-//1st level spells @115006
-ACTION_PHP_EACH lev1_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115006" "@115006
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,5)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//copy over all lev based tpas
-COPY ~%folder%/lib/scroll_lists/lev1_scr.tpa~ ~override~  //lev 1 scr
-COPY ~%folder%/lib/scroll_lists/lev2_scr.tpa~ ~override~  //lev 2 scr
-COPY ~%folder%/lib/scroll_lists/lev3_scr.tpa~ ~override~  //lev 3 scr
-COPY ~%folder%/lib/scroll_lists/lev4_scr.tpa~ ~override~  //lev 4 scr
-COPY ~%folder%/lib/scroll_lists/lev5_scr.tpa~ ~override~  //lev 5 scr
-COPY ~%folder%/lib/scroll_lists/lev6_scr.tpa~ ~override~  //lev 6 scr
-COPY ~%folder%/lib/scroll_lists/lev7_scr.tpa~ ~override~  //lev 7 scr
-COPY ~%folder%/lib/scroll_lists/lev8_scr.tpa~ ~override~  //lev 8 scr
-COPY ~%folder%/lib/scroll_lists/lev9_scr.tpa~ ~override~  //lev 9 scr
-COPY ~%folder%/lib/scroll_lists/levg_scr.tpa~ ~override~  //lev 9 scr
-COPY ~%folder%/lib/scroll_lists/levs_scr.tpa~ ~override~  //lev 9 scr
-COPY ~%folder%/lib/scroll_lists/scrgold.tpa~ ~override~  //scroll gold
-COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~override~  //lev 9 scr
-//spls for xp cost
-ACTION_IF (%b_xp_scroll_cost% > 0) BEGIN //xp reduction spls
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override~
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP02.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 12) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP03.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 18) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP04.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 40) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP05.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 50) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP06.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 60) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP07.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 112) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP08.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 128) END
- COPY ~%folder%/data/scrolls/B_RXP01.spl~ ~override/B_RXP09.spl~
-    LPF ALTER_EFFECT INT_VAR parameter1 = (0 - 144) END
-END
-
-COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ //copies all itm files
-    PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-    READ_BYTE 0x001C type //Item type
-        PATCH_IF (type = 0x000b) BEGIN  //if scroll type
-        //check if casts spell from scroll list.  If so, place in 'no' category
-        //add these scrolls for placement
-		READ_LONG  0x64 "abil_off" ELSE 0
-  		READ_SHORT 0x68 "abil_num" ELSE 0
-		READ_LONG  0x6a "fx_off"   ELSE 0
-  		FOR (index = 0 ; index < abil_num ; index = index + 1) BEGIN
-    		READ_BYTE ("%abil_off%" + (0x38 * "%index%")) "type"
-			PATCH_IF ("%type%" = 3) BEGIN // magical
-      			READ_SHORT ("%abil_off%" + 0x1e + (0x38 * "%index%")) "abil_fx_num"
-      			READ_SHORT ("%abil_off%" + 0x20 + (0x38 * "%index%")) "abil_fx_idx"
-      			FOR (index2 = 0 ; index2 < abil_fx_num ; index2 = index2 + 1) BEGIN
-        			READ_SHORT ("%fx_off%" +        (0x30 * ("%abil_fx_idx%" + "%index2%"))) "opcode"
-        			PATCH_IF (("%opcode%" = 146) OR ("%opcode%" = 148)) BEGIN // cast spell
-        			     READ_ASCII ("%fx_off%" + 0x14 + (0x30 * ("%abil_fx_idx%" + "%index2%"))) "resource"
-        			     //Create Scroll to gold list
-                                     INNER_PATCH_SAVE da_spl ~%resource%~ BEGIN  END
-                                     INNER_PATCH_SAVE da_scr ~%SOURCE_RES%~ BEGIN  END
-        			     READ_LONG 0x34 gold
-        			     PATCH_IF (gold > 0) BEGIN
-        			       PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 1) BEGIN //set new_gold if xp gold reduction
-        			            SET new_gold = (%gold% / 2)
-        			            //PATCH_PRINT "What is %new_gold%? Should be 1/2 %gold%."
-        			          INNER_ACTION BEGIN
-        			          //CONTINUE!!!!!!
-		                               COPY_EXISTING ~%da_spl%.spl~ ~override~
-
-        			          END
-        			       END
-                                       ELSE PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 1) BEGIN //set new_gold if xp gold reduction
-        			            SET new_gold = (%gold%)
-        			            //PATCH_PRINT "What is %new_gold%? Should be 1/2 %gold%."
-        			          INNER_ACTION BEGIN
-		                               COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                  REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			          END
-                                       END
-
-        			     END
-                                     INNER_ACTION BEGIN
-                                          COPY_EXISTING ~%da_spl%.spl~ ~override~
-                                              PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-                                                   READ_LONG  0x0034 level //spell level
-                                                       PATCH_IF (level = 1) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev1_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 100)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 50)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 1
-                                                       PATCH_IF (level = 2) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev2_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 100)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 50)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 2
-                                                       PATCH_IF (level = 3) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev3_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 100)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 50)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 3
-                                                       PATCH_IF (level = 4) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev4_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 100)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 50)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 4
-                                                       PATCH_IF (level = 5) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev5_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 100)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (%level% * 50)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 5
-                                                       PATCH_IF (level = 6) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev6_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (1000)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (500)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 6
-                                                       PATCH_IF (level = 7) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev7_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (1500)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (750)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 7
-                                                       PATCH_IF (level = 8) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev8_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (2500)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (1250)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 8
-                                                       PATCH_IF (level = 9) BEGIN
-                                                            INNER_ACTION BEGIN
-		                                            COPY_EXISTING ~lev9_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                            END //inner action
-                                                            PATCH_IF !(%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (5000)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                            PATCH_IF (%b_xp_scroll_cost% = 1) AND (%b_real_scroll_prices% = 0) BEGIN  //set new_gold if not xp gold reduction (must do by lev)
-                                                               SET new_gold = (2500)
-        			                                   INNER_ACTION BEGIN
-		                                                   COPY_EXISTING ~scrgold.tpa~ ~override~
-		                                                   REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_scr%~ => ~%new_gold%~"
-        			                                   END
-                                                            END
-                                                       END//level 9
-                                                       INNER_ACTION BEGIN  //now, just a general list for special cases
-		                                            COPY_EXISTING ~levg_scr.tpa~ ~override~
-		                                            REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%da_spl%~ => ~%da_scr%~"
-                                                       END //inner action
-                                              END//source size
-                                              BUT_ONLY
-                                     END
-                               END//opcode check
-                        END //for loop
-                        END //magical check
-               END //for check
-        END//item type scroll
-   END//source size
-   BUT_ONLY
-
-
-//now, some special cases
-
-//include just g scr/spl lists
-INCLUDE ~override/levg_scr.tpa~  //
-
-
-COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
-  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-    READ_LONG  0x0008 ref_num //spell name
-     PATCH_IF (ref_num > 0) BEGIN   //Non empty name
-        LPF RETURN_EFFECT
-         INT_VAR
-         RET
-                have_all
-                the_opcode
-                eff_resource
-                ref
-         END  //return effect
-         PATCH_IF (((the_opcode = 146) OR (the_opcode = 148))                 AND
-                  (FILE_CONTAINS_EVALUATED(~levg_scr.tpa~ ~%eff_resource%~))) BEGIN  //PATCH_PRINT "%ref% references %eff_resource%"
-                  INNER_PATCH_SAVE z_ref ~%ref%~ BEGIN  END
-                  INNER_PATCH_SAVE z_resource ~%eff_resource%~ BEGIN  END
-                       READ_LONG  0x0034 s_level
-                       INNER_PATCH_SAVE level ~%s_level%~ BEGIN  END
-                           INNER_ACTION BEGIN
-                             ACTION_IF (level > 0) AND (level < 10) BEGIN
-                         //    PRINT "What has survived to this point? %z_ref%?"
-                               ACTION_PHP_EACH lev_general_scroll AS der_spell => der_scroll BEGIN
-                                     ACTION_IF ("%der_spell%" STRING_EQUAL_CASE "%z_resource%") BEGIN
-                                       COPY_EXISTING ~lev%level%_scr.tpa~ ~override~
-		           REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%z_ref%~ => ~%der_scroll%~"
-                                     END //name equal
-                               END //php
-                             END//level restrictions
-                           END  ///inner action
-
-         END //opcode and presence in g
-     END  //non empty name
-  END  //source_size
-  BUT_ONLY
-  
- //include just all 'real' scr/spl lists
-INCLUDE ~override/lev1_scr.tpa~  //
-INCLUDE ~override/lev2_scr.tpa~  //
-INCLUDE ~override/lev3_scr.tpa~  //
-INCLUDE ~override/lev4_scr.tpa~  //
-INCLUDE ~override/lev5_scr.tpa~  //
-INCLUDE ~override/lev6_scr.tpa~  //
-INCLUDE ~override/lev7_scr.tpa~  //
-INCLUDE ~override/lev8_scr.tpa~  //
-INCLUDE ~override/lev9_scr.tpa~  //
-
-//lets link spell with spell name text:
-ACTION_PHP_EACH lev_general_scroll AS zu_spell => zu_scroll BEGIN
-  COPY_EXISTING ~%zu_spell%.SPL~ ~override~ //copies all spl files
-  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-      READ_STRREF 0x0008 s_name
-     // PATCH_PRINT "~%zu_spell%~ => ~%s_name%~"
-       INNER_ACTION BEGIN
-	COPY_EXISTING ~levs_scr.tpa~ ~override~
-	REPLACE_TEXTUALLY "BEGIN" "BEGIN
-~%zu_spell%~ => ~%s_name%~"
-       END
-  END  //source size
-  BUT_ONLY 
-END
-//now to construct the scroll dialog
-INCLUDE ~override/levs_scr.tpa~  // spell to name php
-
-//SCROLL COST:
-INCLUDE ~override/scrgold.tpa~  //
-
-//1st level spells @115006
-ACTION_PHP_EACH lev1_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115006" "@115006
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,5)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//2nd level spells @115007
-ACTION_PHP_EACH lev2_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115007" "@115007
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,11)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP02", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//3rd level spells @115008
-ACTION_PHP_EACH lev3_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115008" "@115008
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,16)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP03", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//4th level spells @115009
-ACTION_PHP_EACH lev4_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115009" "@115009
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,39)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP04", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//5th level spells @115010
-ACTION_PHP_EACH lev5_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115010" "@115010
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,49)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP05", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//6th level spells @115011
-ACTION_PHP_EACH lev6_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115011" "@115011
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,59)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP06", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//7th level spells @115012
-ACTION_PHP_EACH lev7_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-     SET 1_gold = (%ga_gold% - 1)
-     REPLACE_TEXTUALLY "@115012" "@115012
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,111)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP07", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//8th level spells @115013
-ACTION_PHP_EACH lev8_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-    SET 1_gold = (%ga_gold% - 1)
-      REPLACE_TEXTUALLY "@115013" "@115013
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,127)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP08", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
-//9th level spells @115014
-ACTION_PHP_EACH lev9_scroll AS zee_spell => zee_scroll BEGIN
-  ACTION_PHP_EACH general_scroll_spell_str_ref AS zer_spell => zer_name BEGIN
-   ACTION_IF ("%zer_spell%" STRING_EQUAL_CASE "%zee_spell%") BEGIN
-            ACTION_PHP_EACH scroll_to_gold AS dur_skrol => dur_moneys BEGIN
-               ACTION_IF ("%dur_skrol%" STRING_EQUAL_CASE "%zee_scroll%") BEGIN
-                    //PRINT "Let's make sure that %dur_skrol% is identical to %zee_scroll% and makes it through to this check."
-                    OUTER_SPRINT ~ga_gold~ ~%dur_moneys%~
-               END
-            END
-    COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
-      REPLACE_TEXTUALLY "@115014" "@115014
-IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%ga_gold%) DestroyGold(%ga_gold%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
-      PATCH_IF (%b_xp_scroll_cost% > 0) BEGIN
-          REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,143)~
-          REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP09", myself)~
-      END
-      REPLACE_TEXTUALLY ~THE_SPELL~ ~"%zee_spell%"~
-      REPLACE_TEXTUALLY ~THE_SCROLL~ ~"%zee_scroll%"~
-      REPLACE_TEXTUALLY ~NAME_PLACEHOLDER~ ~"Create scroll of %zer_name%"~
-    END //spell name is equal
-  END   //php
-END     //php
-
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 //////////////////
@@ -1512,46 +836,6 @@ COPY ~%folder%/data/scrolls/QDSCRCK.eff~ ~override~      //eff that applies spl 
 COPY ~%folder%/data/scrolls/B_APS01.spl~ ~override~      //apply spl to sor
 COPY ~%folder%/data/scrolls/B_APM01.spl~ ~override~      //apply spl to mage
 
-//scroll kits
-ACTION_IF (%b_material_scroll_cost% > 0) BEGIN //scroll kits
-//standard materials
- COPY ~%folder%/data/scrolls/B_BPG02.bam~ ~override~  //blank scroll image
- COPY ~%folder%/data/scrolls/B_BPG01.itm~ ~override~  //blank scroll item
-        SAY NAME1 @115104
-        SAY NAME2 @115104
-        SAY UNIDENTIFIED_DESC @115105
-	SAY DESC @115105
-//quality materials
- COPY ~%folder%/data/scrolls/B_BPG01.itm~ ~override/B_BPG02.itm~  //blank scroll item
-        SAY NAME1 @115106
-        SAY NAME2 @115106
-        SAY UNIDENTIFIED_DESC @115107
-	SAY DESC @115107
-	WRITE_LONG 0x0034 ~5~ //gold
-	WRITE_BYTE 0x0038 ~6~ //stack
-//masterwork materials
- COPY ~%folder%/data/scrolls/B_BPG01.itm~ ~override/B_BPG03.itm~  //blank scroll item
-        SAY NAME1 @115108
-        SAY NAME2 @115108
-        SAY UNIDENTIFIED_DESC @115108
-	SAY DESC @115108
-	WRITE_LONG 0x0034 ~200~ //gold
-	WRITE_BYTE 0x0038 ~9~ //stack
-//scroll kit, posessing standard quality materials (at first)
- COPY ~%folder%/data/scrolls/B_SCKT2.itm~ ~override~ //scroll kit
-        SAY NAME1 @115102
-        SAY NAME2 @115102
-        SAY UNIDENTIFIED_DESC @115103
-	SAY DESC @115103
-
- COPY ~%folder%/data/scrolls/B_SCKT1.sto~ ~override~ //scroll kit 'store'
-    SAY NAME2 @115102
-    ADD_STORE_ITEM "B_BPG01" #1 #0 #0 ~IDENTIFIED~ #100
-
-//Make scroll kits having better quality materials
-
-//CONTINUE: have lev 3-6 scrolls morph into standard materials and lev 7-9 scrolls morph into quality materials
-END
 
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -1714,7 +998,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN  //to exclude where already added
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~  //replace 1 below with %b_cleric_scroll% for cleric scroll acquisition level
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~  //replace 1 below with %b_cleric_scroll% for cleric scroll acquisition level
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_mage_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1726,7 +1010,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~  //replace 1 below with %b_cleric_scroll% for cleric scroll acquisition level
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~  //replace 1 below with %b_cleric_scroll% for cleric scroll acquisition level
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_cleric_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1738,7 +1022,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_druid_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1750,7 +1034,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_bard_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1762,7 +1046,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_paladin_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1774,7 +1058,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_ranger_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1786,7 +1070,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_sorc_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1798,7 +1082,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_monk_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1810,7 +1094,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_shaman_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1822,7 +1106,7 @@ COPY_EXISTING kitlist.2da override
                                                ACTION_IF (!FILE_CONTAINS_EVALUATED(~%clab%.2da~ ~SCRLCRFT~)) BEGIN
                                                APPEND ~%clab%.2da~ ~SCRLCRFT ****       ****       ****       ****       ****     ****       ****       ****       ****       ****      ****       ****       ****       ****       ****      ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****       ****~
                                                 //PRINT "Now Clab is %clab%."
-                                                COPY_EXISTING ~clabz.tpa~ ~override~
+                                                COPY ~%folder%/lib/scroll_lists/clabz.tpa~ ~%folder%/lib/scroll_lists/clabz.tpa~
 		                                REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%clab%~  => ~%b_thief_scroll%~"
                                                END  //does not already have SCRLCRFT
@@ -1832,7 +1116,9 @@ COPY_EXISTING kitlist.2da override
                  END
 BUT_ONLY
 
-INCLUDE ~override/clabz.tpa~  //
+
+
+INCLUDE ~%folder%/lib/scroll_lists/clabz.tpa~  //
 
 //THANKS SUBTLEDOCTOR!
 ACTION_PHP_EACH clabz AS der_clab => der_levs BEGIN
@@ -1895,5 +1181,3 @@ ACTION_IF (%b_mage_scroll% = 0) OR
           END//special rogue/monk stuff
 
 END //at least somebody getting scribe scroll as hla
-
-*/
