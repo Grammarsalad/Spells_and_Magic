@@ -449,7 +449,6 @@ ACTION_PHP_EACH lev_general_scroll AS der_spell => der_scroll  BEGIN
      BUT_ONLY
 END //php
 
-//CONTINUE integrating materials options materials = 0 (none), 1 (basic quality), 2 (quality), 3 (masterwork)
 
 //////////////////////////////////////////////////////////////////////////
 /////// Step 3: Create the dialog from 2da and creation variables
@@ -543,6 +542,21 @@ COPY_EXISTING ~SCRCRFT.2da~ ~override~
                                                COPY ~%folder%/data/scrolls/b_scrib.d~ ~%folder%/data/scrolls/b_scrib.d~  //
                                                    REPLACE_TEXTUALLY "@%refnum%" "@%refnum%
 IF ~HaveSpellRES(THE_SPELL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%cost%) DestroyGold(%cost%) RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
+                                                   //monk check
+                                                   PATCH_IF (!(%b_monk_scroll% < 0) AND ((%b_monk_scroll_maxlev% = %level%) OR (%b_monk_scroll_maxlev% > %level%))) AND (scroll_type = 2) BEGIN
+                                                       REPLACE_TEXTUALLY "GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT" "GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT
+IF ~Class(Myself,MONK) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%cost%) DestroyGold(%cost%) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
+                                                   END
+                                                   //thief check
+                                                   PATCH_IF (!(%b_thief_scroll% < 0) AND ((%b_thief_scroll_maxlev% = %level%) OR (%b_thief_scroll_maxlev% > %level%))) AND (scroll_type = 1) BEGIN
+                                                       REPLACE_TEXTUALLY "GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT" "GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT
+IF ~Class(Myself,THIEF_ALL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%cost%) DestroyGold(%cost%) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
+                                                   END
+                                                   //bard check
+                                                   PATCH_IF (!(%b_bard_divine_scroll% < 0) AND ((%b_bard_divine_level% = %level%) OR (%b_bard_divine_level% > %level%))) AND (scroll_type = 2) BEGIN
+                                                       REPLACE_TEXTUALLY "RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT~ EXIT" "RemoveSpellRES(THE_SPELL) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT
+IF ~Class(Myself,BARD_ALL) PartyGoldGT(%1_gold%)~ THEN REPLY NAME_PLACEHOLDER DO ~TakePartyGold(%cost%) DestroyGold(%cost%) GiveItemCreate(THE_SCROLL,Myself,1,1,1)~ EXIT"
+                                                   END
                                                    PATCH_IF (%b_xp_scroll_cost% = %scroll_type%) OR (%b_xp_scroll_cost% > 2) BEGIN
                                                        REPLACE_TEXTUALLY ~HaveSpellRES(THE_SPELL)~ ~HaveSpellRES(THE_SPELL) XPGT(myself,%1_xp%)~
                                                        REPLACE_TEXTUALLY ~RemoveSpellRES(THE_SPELL)~ ~RemoveSpellRES(THE_SPELL) ApplySpellRES("B_RXP01",myself)~
@@ -1147,6 +1161,8 @@ END
 
 ////////////////////////////////////////////////////////////
 //////////////// High Level Abilities
+//issues: CONTINUE
+//monk doesn't add 2022-11-03
 
 ACTION_IF (%b_mage_scroll% = 0) OR
           (%b_cleric_scroll% = 0) OR
