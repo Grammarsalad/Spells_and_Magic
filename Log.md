@@ -2,7 +2,11 @@
 
 # log
 
-TO DO: Scrolls: Bard, Monk, and Thief Scrolls
+Version 0.91.02
+
+2022-10-26 - 2022-11-10
+
+- Scroll creation hlas (done?)
 
 
 Version 0.91.01
