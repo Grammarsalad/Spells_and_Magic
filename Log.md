@@ -2,6 +2,12 @@
 
 # log
 
+2022-11-22 
+
+- Updated craft scroll 
+
+- Started 3e potions
+
 Version 0.91.02
 
 2022-10-26 - 2022-11-10
