@@ -198,7 +198,8 @@ BEGIN @200  //Add Spell Scroll Crafting
 SUBCOMPONENT @52 //Scroll Crafting
 DESIGNATED 200
 GROUP @2  //Magic Item Creation
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @3004
+REQUIRE_PREDICATE (!(GAME_IS ~iwdee~) OR (FILE_EXISTS_IN_GAME ~mohla01.itm~ )) @3010
 
 
 LAM b_scroll_global_settings
@@ -221,8 +222,9 @@ BEGIN @201  //Add Spell Scroll Crafting (add missing priest scrolls)
 SUBCOMPONENT @52 //Scroll Crafting
 DESIGNATED 201
 GROUP @2  //Magic Item Creation
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~B_sna201.itm~) AND !(FILE_EXISTS_IN_GAME ~B_fnp070.itm~) @902  //~Priest scrolls have already been added by other means!~
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @3004
+REQUIRE_PREDICATE (!(GAME_IS ~iwdee~) OR (FILE_EXISTS_IN_GAME ~mohla01.itm~ )) @3010
+REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~B_sna201.itm~) AND !(FILE_EXISTS_IN_GAME ~B_fnp070.itm~) @3007  //~Priest scrolls have already been added!~
 
 LAM b_scroll_global_settings
 

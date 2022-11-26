@@ -1,0 +1,341 @@
+Potion of Stone to Flesh. Filename is SPBP0001.
+
+Potion of Improved Invisibility. Filename is SPDR401.
+
+Potion of Bless. Filename is SPPR101.
+
+Potion of Cure Light Wounds. Filename is SPPR103.
+
+Potion of Detect Evil. Filename is SPPR104.
+
+Potion of Protection From Evil. Filename is SPPR107.
+
+Potion of Remove Fear. Filename is SPPR108.
+
+Potion of Sanctuary. Filename is SPPR109.
+
+Potion of Armor of Faith. Filename is SPPR111.
+
+Potion of Spirit Ward. Filename is SPPR150.
+
+Potion of Aid. Filename is SPPR201.
+
+Potion of Barkskin. Filename is SPPR202.
+
+Potion of Chant. Filename is SPPR203.
+
+Potion of Find Traps. Filename is SPPR205.
+
+Potion of Goodberry. Filename is SPPR207.
+
+Potion of Know Alignment. Filename is SPPR209.
+
+Potion of Resist Fire and Cold. Filename is SPPR210.
+
+Potion of Slow Poison. Filename is SPPR212.
+
+Potion of Draw Upon Holy Might. Filename is SPPR214.
+
+Potion of Protection From Fire. Filename is SPPR306.
+
+Potion of Remove Curse. Filename is SPPR307.
+
+Potion of Remove Paralysis. Filename is SPPR308.
+
+Potion of Invisibility Purge. Filename is SPPR309.
+
+Potion of Strength of One. Filename is SPPR312.
+
+Potion of Cure Medium Wounds. Filename is SPPR315.
+
+Potion of Cure Disease. Filename is SPPR317.
+
+Potion of Zone of Sweet Air. Filename is SPPR318.
+
+Potion of Spiritual Clarity. Filename is SPPR350.
+
+Potion of Cure Serious Wounds. Filename is SPPR401.
+
+Potion of Free Action. Filename is SPPR403.
+
+Potion of Neutralize Poison. Filename is SPPR404.
+
+Potion of Defensive Harmony. Filename is SPPR406.
+
+Potion of Protection From Lightning. Filename is SPPR407.
+
+Potion of Protection From Evil, 10' Radius. Filename is SPPR408.
+
+Potion of Death Ward. Filename is SPPR409.
+
+Potion of Holy Power. Filename is SPPR412.
+
+Potion of Farsight. Filename is SPPR415.
+
+Potion of Cloak of Fear. Filename is SPPR416.
+
+Potion of Lesser Restoration. Filename is SPPR417.
+
+Potion of Cure Critical Wounds. Filename is SPPR502.
+
+Potion of Raise Dead. Filename is SPPR504.
+
+Potion of True Seeing. Filename is SPPR505.
+
+Potion of Iron Skins. Filename is SPPR506.
+
+Potion of Champion's Strength. Filename is SPPR507.
+
+Potion of Chaotic Commands. Filename is SPPR508.
+
+Potion of Magic Resistance. Filename is SPPR509.
+
+Potion of Righteous Magic. Filename is SPPR513.
+
+Potion of Mass Cure. Filename is SPPR514.
+
+Potion of Repulse Undead. Filename is SPPR515.
+
+Potion of Pixie Dust. Filename is SPPR516.
+
+Potion of Recall Spirit. Filename is SPPR550.
+
+Potion of Blade Barrier. Filename is SPPR603.
+
+Potion of Fire Seeds. Filename is SPPR606.
+
+Potion of Heal. Filename is SPPR607.
+
+Potion of False Dawn. Filename is SPPR609.
+
+Potion of Wondrous Recall. Filename is SPPR611.
+
+Potion of Physical Mirror. Filename is SPPR613.
+
+Potion of Blade Barrier. Filename is SPPR698.
+
+Potion of Shield of the Archons. Filename is SPPR701.
+
+Potion of Nature's Beauty. Filename is SPPR704.
+
+Potion of Holy Word. Filename is SPPR710.
+
+Potion of Regeneration. Filename is SPPR711.
+
+Potion of Resurrection. Filename is SPPR712.
+
+Potion of Greater Restoration. Filename is SPPR713.
+
+Potion of Unholy Word. Filename is SPPR715.
+
+Potion of Mass Raise Dead. Filename is SPPR729.
+
+Potion of Ether Gate. Filename is SPPR750.
+
+Potion of Haste. Filename is SPRA301.
+
+Potion of Minor Spell Deflection. Filename is SPRA302.
+
+Potion of Protection From Normal Missiles. Filename is SPRA303.
+
+Potion of Armor. Filename is SPWI102.
+
+Potion of Friends. Filename is SPWI107.
+
+Potion of Protection From Petrification. Filename is SPWI108.
+
+Potion of Identify. Filename is SPWI110.
+
+Potion of Infravision. Filename is SPWI111.
+
+Potion of Protection From Evil. Filename is SPWI113.
+
+Potion of Shield. Filename is SPWI114.
+
+Potion of Reflected Image. Filename is SPWI120.
+
+Potion of Blur. Filename is SPWI201.
+
+Potion of Detect Evil. Filename is SPWI202.
+
+Potion of Detect Invisibility. Filename is SPWI203.
+
+Potion of Invisibility. Filename is SPWI206.
+
+Potion of Knock. Filename is SPWI207.
+
+Potion of Know Alignment. Filename is SPWI208.
+
+Potion of Luck. Filename is SPWI209.
+
+Potion of Resist Fear. Filename is SPWI210.
+
+Potion of Mirror Image. Filename is SPWI212.
+
+Potion of Strength. Filename is SPWI214.
+
+Potion of Vocalize. Filename is SPWI219.
+
+Potion of Chaos Shield. Filename is SPWI222.
+
+Potion of Clairvoyance. Filename is SPWI301.
+
+Potion of Haste. Filename is SPWI305.
+
+Potion of Invisibility, 10' Radius. Filename is SPWI307.
+
+Potion of Non-Detection. Filename is SPWI310.
+
+Potion of Protection From Normal Missiles. Filename is SPWI311.
+
+Potion of Vampiric Touch. Filename is SPWI314.
+
+Potion of Wraithform. Filename is SPWI315.
+
+Potion of Ghost Armor. Filename is SPWI317.
+
+Potion of Minor Spell Deflection. Filename is SPWI318.
+
+Potion of Protection From Fire. Filename is SPWI319.
+
+Potion of Protection From Cold. Filename is SPWI320.
+
+Potion of Detect Illusion. Filename is SPWI322.
+
+Potion of Dimension Door. Filename is SPWI402.
+
+Potion of Fireshield (Blue). Filename is SPWI403.
+
+Potion of Improved Invisibility. Filename is SPWI405.
+
+Potion of Minor Globe of Invulnerability. Filename is SPWI406.
+
+Potion of Stoneskin. Filename is SPWI408.
+
+Potion of Remove Curse. Filename is SPWI410.
+
+Potion of Polymorph Self. Filename is SPWI416.
+
+Potion of Enchanted Weapon. Filename is SPWI417.
+
+Potion of Fireshield (Red). Filename is SPWI418.
+
+Potion of Minor Sequencer. Filename is SPWI420.
+
+Potion of Farsight. Filename is SPWI424.
+
+Potion of Wizard Eye. Filename is SPWI425.
+
+Potion of Shadow Door. Filename is SPWI505.
+
+Potion of Spell Immunity. Filename is SPWI510.
+
+Potion of Protection From Normal Weapons. Filename is SPWI511.
+
+Potion of Protection From Electricity. Filename is SPWI512.
+
+Potion of Oracle. Filename is SPWI515.
+
+Potion of Protection From Acid. Filename is SPWI517.
+
+Potion of Spell Shield. Filename is SPWI519.
+
+Potion of Minor Spell Turning. Filename is SPWI522.
+
+Potion of Sunfire. Filename is SPWI523.
+
+Potion of Immunity: Abjuration. Filename is SPWI590.
+
+Potion of Immunity: Conjuration. Filename is SPWI591.
+
+Potion of Immunity: Divination. Filename is SPWI592.
+
+Potion of Immunity: Enchantment. Filename is SPWI593.
+
+Potion of Immunity: Illusion. Filename is SPWI594.
+
+Potion of Immunity: Evocation. Filename is SPWI595.
+
+Potion of Immunity: Necromancy. Filename is SPWI596.
+
+Potion of Immunity: Alteration. Filename is SPWI597.
+
+Potion of Globe of Invulnerability. Filename is SPWI602.
+
+Potion of Tenser's Transformation. Filename is SPWI603.
+
+Potion of Protection From Magic Energy. Filename is SPWI606.
+
+Potion of Mislead. Filename is SPWI607.
+
+Potion of True Sight. Filename is SPWI609.
+
+Potion of Protection From Magical Weapons. Filename is SPWI611.
+
+Potion of Improved Haste. Filename is SPWI613.
+
+Potion of Spell Deflection. Filename is SPWI618.
+
+Potion of Stone to Flesh. Filename is SPWI625.
+
+Potion of Spell Turning. Filename is SPWI701.
+
+Potion of Protection From The Elements. Filename is SPWI702.
+
+Potion of Project Image. Filename is SPWI703.
+
+Potion of Mantle. Filename is SPWI708.
+
+Potion of Spell Sequencer. Filename is SPWI710.
+
+Potion of Mordenkainen's Sword. Filename is SPWI716.
+
+Potion of Mass Invisibility. Filename is SPWI721.
+
+Potion of Limited Wish. Filename is SPWI722.
+
+Potion of Improved Chaos Shield. Filename is SPWI723.
+
+Potion of Spell Deflection. Filename is SPWI802.
+
+Potion of Protection From Energy. Filename is SPWI803.
+
+Potion of Simulacrum. Filename is SPWI804.
+
+Potion of Improved Mantle. Filename is SPWI808.
+
+Potion of Spell Trigger. Filename is SPWI809.
+
+Potion of Spell Trap. Filename is SPWI902.
+
+Potion of Absolute Immunity. Filename is SPWI907.
+
+Potion of Chain Contingency. Filename is SPWI908.
+
+Potion of Time Stop. Filename is SPWI909.
+
+Potion of Imprisonment. Filename is SPWI910.
+
+Potion of Wail of the Banshee. Filename is SPWI913.
+
+Potion of Energy Drain. Filename is SPWI914.
+
+Potion of Shapechange. Filename is SPWI916.
+
+Potion of Freedom. Filename is SPWI917.
+
+Potion of Wish. Filename is SPWI919.
+
+Potion of Repulsion. Filename is SPWM101.
+
+Potion of Minor Globe of Invulnerability. Filename is SPWM125.
+
+Potion of Minor Globe of Invulnerability. Filename is SPWM126.
+
+Potion of Goodberry. Filename is SPWM136.
+
+Potion of Goodberry. Filename is SPWM140.
+
+Potion of Goodberry. Filename is SPWM141.
+
+Potion of Heal. Filename is SPWM168.

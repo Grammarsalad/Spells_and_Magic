@@ -16,13 +16,32 @@ COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
     READ_LONG  0x0034 level //spell level
       PATCH_IF (level = %b_3e_potion_max_level%) OR (level < %b_3e_potion_max_level%) BEGIN   //level equal or greater than max
       READ_BYTE 0x001C type //Spell type
-         PATCH_IF (type = 1) OR (type = 1) BEGIN  //wiz or cleric spell
+         PATCH_IF (type = 1) OR (type = 2) BEGIN  //wiz or cleric spell
          READ_BYTE 0x0027 sec_type //Sec Spell type
-             PATCH_IF (sec_type = 0x0d) OR (sec_type = 0x02) OR (sec_type = 0x01) OR (sec_type = 0x03) OR (sec_type = 0x07) BEGIN
-             //CONTINUE (ONLY TARGET SELF OR RANGE 1)
-             READ_STRREF 0x0008 s_name
-                PATCH_PRINT "Potion of %s_name%"
-             
+         READ_SHORT 0x007E target //Target-check
+         READ_SHORT 0x0080 range //range-check
+             PATCH_IF (sec_type = 0x0d) OR (sec_type = 0x02) OR (sec_type = 0x01) OR (sec_type = 0x03) OR (sec_type = 0x07) OR (target = 5) OR (range < 2) BEGIN
+             READ_LONG  0x0008 name //spell name
+                 PATCH_IF (%name% > 0) BEGIN //CONTINUE (ONLY TARGET SELF OR RANGE 1)
+                     PATCH_IF ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "[0-9][0-9][0-9][A-Z]") BEGIN
+                     PATCH_IF ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPIN") BEGIN
+                     READ_BYTE  0x0022 school //casting graphics school
+                         PATCH_IF !(school = 0) AND !(school > 23) BEGIN
+                         LPF RETURN_EFFECT INT_VAR match_opcode = 12 RET the_opcode END
+                             PATCH_IF !(the_opcode = 12) BEGIN
+                             LPF RETURN_EFFECT INT_VAR match_opcode = 111 RET the_opcode END
+                                 PATCH_IF !(the_opcode = 111) BEGIN
+                                 LPF RETURN_EFFECT INT_VAR match_opcode = 122 RET the_opcode END
+                                     PATCH_IF !(the_opcode = 122) BEGIN
+                                         READ_STRREF 0x0008 s_name
+                                             PATCH_PRINT "Potion of %s_name%. Filename is %SOURCE_RES%."
+                                     END  // inv item opcode
+                                END //weapon opcode
+                             END //dam opcode
+                         END //school
+                     END //spin
+                     END //a-z
+                 END //non zero name
              END  //sec type
          END      //spell type
       END //spell level

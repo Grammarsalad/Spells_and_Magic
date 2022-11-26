@@ -2,7 +2,13 @@
 
 # log
 
-2022-11-22 
+2022-11-25
+
+- Updated scroll tp2
+
+- Update 3e potion
+
+2022-11-22
 
 - Updated craft scroll 
 
