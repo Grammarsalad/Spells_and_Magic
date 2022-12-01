@@ -16,12 +16,13 @@
 
 //@101 to @900: Components
 @101 = ~Install All New Spells (including iwdee spells if not already installed)~
+@119 = ~Install Goodberry: goodberry wine revision~
 
-@200 = ~Add Spell Scroll Crafting~
-@201 = ~Add Spell Scroll Crafting (add missing priest scrolls)~
+@200 = ~Add Spell Scroll Crafting: 2e pnp~
+@201 = ~Add Spell Scroll Crafting: 2e modified~
 
-@210 = ~Add Brew Potion~
-@211 = ~Add Brew Potion (and add 3e potions)~
+@210 = ~Add Brew Potion: 2e pnp~
+@211 = ~Add Brew Potion: 2e modified~
 
 //@901 to @1000: error and misc
 @901 = ~EE games only! ... for now~

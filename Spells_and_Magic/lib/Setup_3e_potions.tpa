@@ -11,6 +11,10 @@
 //////////////////////////////////////////////////////////////////////
 ////////// Create spell to scroll list
 
+////////////////
+//// potion 2da
+COPY ~%folder%/data/potions/potnz.2da~ ~override~  //Potion 2da
+
 COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
     PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
     READ_LONG  0x0034 level //spell level
@@ -22,9 +26,31 @@ COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
          READ_SHORT 0x0080 range //range-check
              PATCH_IF (sec_type = 0x0d) OR (sec_type = 0x02) OR (sec_type = 0x01) OR (sec_type = 0x03) OR (sec_type = 0x07) OR (target = 5) OR (range < 2) BEGIN
              READ_LONG  0x0008 name //spell name
-                 PATCH_IF (%name% > 0) BEGIN //CONTINUE (ONLY TARGET SELF OR RANGE 1)
-                     PATCH_IF ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "[0-9][0-9][0-9][A-Z]") BEGIN
-                     PATCH_IF ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPIN") BEGIN
+                 PATCH_IF (%name% > 0) BEGIN //non-empty name
+                     PATCH_IF ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "[0-9][0-9][0-9][A-Z]") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPIN") AND 
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPWM") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "DEVAHEAL") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "DGARCHON") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "CDPR417") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "CDPR417") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "CDPR417") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SENSPIHE") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "OHPRGD10") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "OHDXDIS") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "OHDCUT02") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "MELSTONE") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "JWGLOBE") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "DW#FPPLO") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "DGRIGHT") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "DGFAITH") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPRA") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "STAF") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "WISH") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPDR") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPJA") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "BALSHLD") AND
+                     ("%SOURCE_RES%" STRING_CONTAINS_REGEXP "SPBP") BEGIN
                      READ_BYTE  0x0022 school //casting graphics school
                          PATCH_IF !(school = 0) AND !(school > 23) BEGIN
                          LPF RETURN_EFFECT INT_VAR match_opcode = 12 RET the_opcode END
@@ -33,14 +59,31 @@ COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
                                  PATCH_IF !(the_opcode = 111) BEGIN
                                  LPF RETURN_EFFECT INT_VAR match_opcode = 122 RET the_opcode END
                                      PATCH_IF !(the_opcode = 122) BEGIN
+                                         PATCH_IF !(FILE_CONTAINS_EVALUATED(~HIDESPL.2da~ ~%SOURCE_RES%~)) BEGIN
+                                         INNER_PATCH_SAVE splz ~%SOURCE_RES%~ BEGIN END
                                          READ_STRREF 0x0008 s_name
-                                             PATCH_PRINT "Potion of %s_name%. Filename is %SOURCE_RES%."
+                                             INNER_PATCH_SAVE potion_r ~%SOURCE_RES%~ BEGIN END
+                                             INNER_PATCH_SAVE potion_ref ~%potion_r%~ BEGIN
+                                             REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SPPR~ ~B_PC~       //cleric potions
+                                             REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH ~SPWI~ ~B_PM~  END  //cleric potions
+                                                 PATCH_PRINT "Potion of %s_name%. Spell filename is %splz%. Potion ref is %potion_ref%."
+                                                 READ_LONG  0x0034 level //spell level
+                                                 READ_LONG  0x0008 name //spell name
+                                                 READ_LONG  0x0050 desc //description
+                                                 SET d_level = (%level% * 2)
+                                                 PATCH_PRINT "What is %d_level%"
+                                                 INNER_ACTION BEGIN
+                                                    COPY ~%folder%/data/potions/b_pt.itm~ ~override/%potion_ref%.itm~
+                                                    COPY ~%folder%/lib/potion_lists/potionz.tpa~ ~%folder%/lib/potion_lists/potionz.tpa~
+                                                    REPLACE_TEXTUALLY "BEGIN" "BEGIN
+~%splz%~ => ~%potion_ref%~"
+                                                 END
+                                         END
                                      END  // inv item opcode
                                 END //weapon opcode
                              END //dam opcode
                          END //school
-                     END //spin
-                     END //a-z
+                     END //spin a-z SPBP
                  END //non zero name
              END  //sec type
          END      //spell type
@@ -48,6 +91,22 @@ COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~ //copies all spl files
     END //source size
 BUT_ONLY
 
+INCLUDE ~%folder%/lib/potion_lists/potionz.tpa~  //
+
+
+LAF cd_items_casting_spells INT_VAR cast_at_level =  EVAL ~%d_level%~ item_header = 1 STR_VAR item = EVAL ~%potion_ref%~  spell = EVAL ~%splz%~ END
+
+
+/*
+
+//for reference
+INNER_ACTION BEGIN
+    APPEND ~potnz.2da~ ~B_%der_spell%%TAB%%type%%TAB%%name%%TAB%%desc%%TAB%%der_scroll%%TAB%%der_spell%%TAB%%final_gold%%TAB%%level%%TAB%%materials%%TAB%%xp_cost%%TAB%%can_fail%~  //current hp Greater than
+END
+
+*/
+
+//special potions (shaman spells, identify, breath likes (ice breath), bottles of blowup)
 /*
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -112,7 +171,6 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm~ ~override~ //copies all itm files
                                     	       COPY_EXISTING ~exclude_scrolls.tpa~ ~override~
 		      REPLACE_TEXTUALLY "BEGIN" "BEGIN
 ~%da_spl%~ => ~%da_scr%~"
-
                                           END
                                 END //opcode check
                         END//for

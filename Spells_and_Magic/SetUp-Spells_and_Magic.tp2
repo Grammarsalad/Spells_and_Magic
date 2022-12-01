@@ -35,6 +35,8 @@ ALWAYS
 
         INCLUDE ~Spells_and_Magic/lib/variables.ini~
 
+        INCLUDE ~Spells_and_Magic/lib/item_casting.tpa~
+
         INCLUDE ~Spells_and_Magic/lib/snm_functions.tpa~
 
         INCLUDE ~Spells_and_Magic/lib/lib.tpa~  //morph's hla functions
@@ -169,6 +171,17 @@ INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//			119: Install Goodberry: goodberry wine revision
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @119  //Install Goodberry: goodberry wine revision
+DESIGNATED 119
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -190,7 +203,7 @@ INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//	200: Craft Spell Scrolls
+//	200: Craft Spell Scrolls: Add Spell Scroll Crafting: 2e pnp
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -209,12 +222,18 @@ LAM b_scroll_level_settings
 //marker
 COPY_EXISTING ~SW1H04.itm~ ~override/B_sam200.itm~
 
+ACTION_IF (%b_add_priest_scrolls% = 1) BEGIN //if set to add priest scrolls
+  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam201.itm~
+
+  INCLUDE ~%folder%/lib/Setup_Priest_Scrolls.tpa~
+END
+
 INCLUDE ~%folder%/components/class_skills/scroll_crafting.tpa~  //
 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//	201: Craft Spell Scrolls and add priest scrolls (if not already installed)
+//	201: Craft Spell Scrolls: Add Spell Scroll Crafting: 2e modified
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -230,12 +249,24 @@ LAM b_scroll_global_settings
 
 LAM b_scroll_level_settings
 
+//2e modified settings
+
+OUTER_SET b_mage_scroll     =  1
+OUTER_SET b_cleric_scroll   =  4
+OUTER_SET b_druid_scroll    =  6
+OUTER_SET b_bard_scroll     = 13
+OUTER_SET b_paladin_scroll  =  0
+OUTER_SET b_ranger_scroll   =  0
+OUTER_SET b_sorc_scroll     =  4
+OUTER_SET b_shaman_scroll   =  6
+
+ACTION_IF (%b_add_priest_scrolls% = 1) BEGIN //if set to add priest scrolls
 
 //marker
-COPY_EXISTING ~SW1H04.itm~ ~override/B_sam201.itm~
+  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam201.itm~
 
-INCLUDE ~%folder%/lib/Setup_Priest_Scrolls.tpa~
-
+  INCLUDE ~%folder%/lib/Setup_Priest_Scrolls.tpa~
+END
 
 INCLUDE ~%folder%/components/class_skills/scroll_crafting.tpa~
 
@@ -250,7 +281,7 @@ INCLUDE ~%folder%/components/class_skills/scroll_crafting.tpa~
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//	210: Brew Potions
+//	210: Add Brew Potion: 2e pnp
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -260,10 +291,19 @@ DESIGNATED 210
 GROUP @2  //Magic Item Creation
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
 
+LAM b_potion_global_settings
+
+ACTION_IF (%b_3e_potion_create% = 1) BEGIN //if set to add priest scrolls
+  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam211.itm~
+
+  INCLUDE ~%folder%/lib/Setup_3e_potions.tpa~
+
+END
+
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//	211: Brew Potions and add 3e potions (if not already installed)
+//	211: Add Brew Potion: 2e modified
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
@@ -275,7 +315,12 @@ REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for
 
 LAM b_potion_global_settings
 
-INCLUDE ~%folder%/lib/Setup_3e_potions.tpa~
+ACTION_IF (%b_3e_potion_create% = 1) BEGIN //if set to add priest scrolls
+  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam211.itm~
+
+  INCLUDE ~%folder%/lib/Setup_3e_potions.tpa~
+
+END
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
