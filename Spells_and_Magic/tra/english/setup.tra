@@ -16,7 +16,29 @@
 
 //@101 to @900: Components
 @101 = ~Install All New Spells (including iwdee spells if not already installed)~
-@119 = ~Install Goodberry: goodberry wine revision~
+@110 = ~Local Revision: Install Revised Spells (as per the ini settings)~
+@119 = ~Local Revision: Install Goodberry: goodberry wine revision~
+
+@120 = ~Global Revision: Install Cure Spells Heal % of target's hp~
+@121 = ~Global Revision: Install Cure Spells Damage Undead~
+@122 = ~Global Revision: Install Rituals~
+@123 = ~Global Revision: Install Reversible Spells~
+@124 = ~Global Revision: Silencing Cloud Spells~
+@125 = ~Global Revision: Consistent Invisibility Duration~
+@126 = ~Global Revision: Universal Arcane Spells~
+@127 = ~Global Revision: Unique Spell Lists (via ini)~
+@128 = ~Global Revision: Revised Charm Spells~
+@129 = ~Global Revision: Revised Charm Spells (with added Charm Monster spell)~
+@130 = ~Global Revision: Revised Power Word Spells~
+@131 = ~Global Revision: Unified Touch Spells: Auto Hit (save for half)~
+@132 = ~Global Revision: Unified Touch Spells: Attack Hits (no save)~
+@133 = ~Global Revision: Unified Weapon Spells: Weapon "Summon"~
+@134 = ~Global Revision: Unified Weapon Spells: Weapon "Equipped"~
+@135 = ~Global Revision: Cure Disease Damages Oozes~
+@136 = ~Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)~
+@137 = ~Global Revision: Consistent Invisibility Duration: 8 hours~
+@138 = ~Global Revision: Consistent Invisibility Duration: 4 hours~
+@139 = ~Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility)~
 
 @200 = ~Add Spell Scroll Crafting: 2e pnp~
 @201 = ~Add Spell Scroll Crafting: 2e modified~
