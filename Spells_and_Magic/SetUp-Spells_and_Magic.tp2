@@ -163,13 +163,29 @@ INCLUDE ~%folder%/comp/Setup_New_Arcane_Spells.tpa~  //
 INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 
 
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-///////                                                   ///////
-///////        Components 110-11x: Revised Spells         ///////
-///////                                                   ///////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+///////                                                                           ///////
+///////    Components 110-119: REVISED SPELLS SETTINGS - LOCAL SPELL REVISIONS    ///////
+///////                                                                           ///////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	 110: Install Revised Spells: revised spells (as per the ini settings)
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @110  //Local Revision: Install Revised Spells (as per the ini settings)
+DESIGNATED 110
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//revised spells ini
+LAM b_spells_new_spells_settings
+
 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
@@ -178,10 +194,267 @@ INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-BEGIN @119  //Install Goodberry: goodberry wine revision
+BEGIN @119  //Local Revision: Install Goodberry: goodberry wine revision
 DESIGNATED 119
 GROUP @0  //New and Revised Spells
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+///////                                                                           ///////
+///////    Components 120-1xx: REVISED SPELLS SETTINGS - GLOBAL SPELL REVISIONS   ///////
+///////                                                                           ///////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	120: Global Revision: Install Cure Spells Heal % of target's hp
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @120  // Global Revision: Install Cure Spells Heal % of target's hp
+DESIGNATED 120
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	121: Global Revision: Install Cure Spells Damage Undead
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @121 // ~Global Revision: Install Cure Spells Damage Undead~
+DESIGNATED 121
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	122: Global Revision: Install Rituals 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @122 // ~Global Revision: Install Rituals~
+DESIGNATED 122
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	123: Global Revision: Install Reversible Spells
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @123 // ~Global Revision: Install Reversible Spells~
+DESIGNATED 123
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	124: Global Revision: Silencing Cloud Spells
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @124 // ~Global Revision: Silencing Cloud Spells~
+DESIGNATED 124
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	126: Global Revision: Universal Arcane Spells
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @126 // ~Global Revision: Universal Arcane Spells~
+DESIGNATED 126
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	127: Global Revision: Unique Spell Lists (via ini)
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @127 // ~Global Revision: Unique Spell Lists (via ini)~
+DESIGNATED 127
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	128: Global Revision: Revised Charm Spells 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @128 // ~Global Revision: Revised Charm Spells~
+SUBCOMPONENT @54 // ~Charm Revision~
+DESIGNATED 128
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	129: Global Revision: Revised Charm Spells (with added Charm Monster spell)
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @129 // Global Revision: Revised Charm Spells (with added Charm Monster spell)
+SUBCOMPONENT @54 // ~Charm Revision~
+DESIGNATED 129
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	130: Global Revision: Revised Power Word Spells
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @130 // Global Revision: Revised Power Word Spells 
+DESIGNATED 130
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	131: Global Revision: Unified Touch Spells: Auto Hit (save for half)
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @131 // Global Revision: Unified Touch Spells: Auto Hit (save for half)
+SUBCOMPONENT @55 // ~Unified Touch Spells~
+DESIGNATED 131
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	132: Global Revision: Unified Touch Spells: Attack Hits (no save)
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @132 // Global Revision: Unified Touch Spells: Attack Hits (no save)
+SUBCOMPONENT @55 // ~Unified Touch Spells~
+DESIGNATED 132
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	133: Global Revision: Unified Weapon Spells: Weapon "Summon"
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @133 //  Global Revision: Unified Weapon Spells: Weapon "Summon" 
+SUBCOMPONENT @56 // ~Unified Weapon Spells~
+DESIGNATED 133
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	134: Global Revision: Unified Weapon Spells: Weapon "Equipped"
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @134 // ~Global Revision: Unified Weapon Spells: Weapon "Equipped"~
+SUBCOMPONENT @56 // ~Unified Weapon Spells~
+DESIGNATED 134
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	135: Global Revision: Cure Disease Damages Oozes
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @135 // ~Global Revision: Cure Disease Damages Oozes~
+DESIGNATED 135
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+// 136: Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @136 // ~Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)~
+SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
+DESIGNATED 136
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	137: Global Revision: Consistent Invisibility Duration: 8 hours 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @137 // ~Global Revision: Consistent Invisibility Duration: 8 hours~
+SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
+DESIGNATED 137
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//	138: Global Revision: Consistent Invisibility Duration: 4 hours
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @138 // ~Global Revision: Consistent Invisibility Duration: 4 hours~
+SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
+DESIGNATED 138
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+// 139: Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility) 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+
+BEGIN @139 // ~Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility)~
+SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
+DESIGNATED 139
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
