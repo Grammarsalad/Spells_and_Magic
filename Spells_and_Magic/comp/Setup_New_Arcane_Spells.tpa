@@ -46,11 +46,6 @@ ACTION_IF (%b_alarm% > 0) BEGIN  //
 COPY ~%folder%/data/new_spells/mage_1/b_alarm.spl~ ~override~   //spl alarm
   SAY NAME1 @65201
   SAY NAME2 @65201
-  LPF ALTER_EFFECT
-      INT_VAR match_opcode = 318            //'Protect' enemies from alarm effects
-      STR_VAR match_resource = ~B_ALARM~
-              resource = EVAL ~%spell_res%~
-  END      //
 
 //itm
 COPY ~%folder%/data/new_spells/mage_1/b_w101.itm~ ~override~   //itm alarm
