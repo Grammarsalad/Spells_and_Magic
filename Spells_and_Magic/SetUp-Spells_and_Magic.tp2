@@ -9,27 +9,27 @@ ALWAYS
 
         OUTER_SPRINT ~folder~ ~Spells_and_Magic~
 
- 	ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
+		ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
           OUTER_SPRINT ~game~ ~bg2ee~
         END
 
- 	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		ACTION_IF GAME_IS ~bgee~ THEN BEGIN
           OUTER_SPRINT ~game~ ~bgee~
         END
 
- 	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
           OUTER_SPRINT ~game~ ~iwdee~
         END
 
- 	ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
+		ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
           OUTER_SPRINT ~style~ ~bgee~
         END
 
- 	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+		ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
           OUTER_SPRINT ~style~ ~iwdee~
         END
 
-  	INCLUDE ~Spells_and_Magic/Spells_and_Magic.ini~
+		INCLUDE ~Spells_and_Magic/Spells_and_Magic.ini~
 
         INCLUDE ~Spells_and_Magic/craft_settings.ini~
 
@@ -51,19 +51,19 @@ ALWAYS
 
         INCLUDE ~Spells_and_Magic/lib/add_sumtable.tpa~
 
-	INCLUDE ~Spells_and_Magic/lib/SEQUENCER_MENU.tpa~
+		INCLUDE ~Spells_and_Magic/lib/SEQUENCER_MENU.tpa~
 
         INCLUDE ~Spells_and_Magic/lib/alter_effect.tpa~
 
-	INCLUDE ~Spells_and_Magic/lib/remove_lines.tpa~
+		INCLUDE ~Spells_and_Magic/lib/remove_lines.tpa~
 
-	INCLUDE ~Spells_and_Magic/lib/summon_table.tpa~
+		INCLUDE ~Spells_and_Magic/lib/summon_table.tpa~
 
-	INCLUDE ~Spells_and_Magic/lib/splprot_attributes.tpa~
+		INCLUDE ~Spells_and_Magic/lib/splprot_attributes.tpa~
 
-	INCLUDE ~Spells_and_Magic/lib/spell_to_innate.tpa~
+		INCLUDE ~Spells_and_Magic/lib/spell_to_innate.tpa~
 
-	INCLUDE ~Spells_and_Magic/lib/spell_clone_effects.tpa~
+		INCLUDE ~Spells_and_Magic/lib/spell_clone_effects.tpa~
 
         INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_fnp.tpa~
 
@@ -73,7 +73,7 @@ ALWAYS
 
         INCLUDE ~Spells_and_Magic/lib/extra_alter_effect.tpa~
 
-  	INCLUDE ~Spells_and_Magic/lib/scroll_placement.tpa~
+		INCLUDE ~Spells_and_Magic/lib/scroll_placement.tpa~
 
 END
 
