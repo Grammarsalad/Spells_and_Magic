@@ -254,7 +254,7 @@ This spell has a special effect on undead creatures. Undead touched by the caste
 @10110043 = ~Spectral Hand~
 @10110044 = ~Cannot heal by any means!~      
 
-@10110044 = ~Spectral Hand
+@10110045 = ~Spectral Hand
 (Necromancy)
 
 Level: 1
@@ -293,6 +293,18 @@ The bonuses granted by Bless increase by +1 at 5th level, and every 5 levels aft
 Multiple bless spells are not cumulative.~
 
 @10110048 = ~Bless Weapon~
+@10110049 = ~. It is cumulative with Dexterity bonuses~
+@10110050 = ~ to any willing creature <PRO_HESHE> touches. It is cumulative with Dexterity bonuses~
+@10110051 = ~Mage Armor removed~
+@10110052 = ~It lasts until successfully dispelled or until its duration expires.~
+@10110053 = ~It lasts until successfully dispelled, the target takes damage, or until its duration expires.~
+@10110054 = ~shield bonus.~
+@10110055 = ~shield bonus. This spell also grants protection in the form of %armor_bonus_hp% bonus hit points.~
+@10110056 = ~that serves as if it were scale mail armor (AC 6)~
+@10110057 = ~that grants it's target a -%armor_bonus_patch% bonus to AC~
+@10110058 = ~with the shield bonus~
+@10110059 = ~with the shield and armor bonus~
+
 
 @10110100 = ~Command~
 @10110101 = ~Command

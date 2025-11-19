@@ -3,7 +3,7 @@
 //@51 to @100: subcomponents
 //@101 to @900: Components
 //@901 to @1000: error and misc
-// @3000 to @4000: Requirements                                                         //
+// @3000 to @4000: Requirements
 
 @0 = ~New and Revised Spells~
 
@@ -17,32 +17,51 @@
 @55 = ~Unified Touch Spells~
 @56 = ~Unified Weapon Spells~
 @57 = ~Consistent Invisibility Duration~
+@58 = ~Cantrips~
+@59 = ~Revised Spells: Global Revisions~
 
 //@101 to @900: Components
-@101 = ~Install All New Spells (including iwdee spells if not already installed)~
-@110 = ~Local Revision: Install Revised Spells (as per the ini settings)~
-@119 = ~Local Revision: Install Goodberry: goodberry wine revision~
+// new spells
+@101 = ~Install All New Spells (including iwdee spells)~
+@102 = ~Install All New Spells (excluding iwdee spells if applicable)~
+//cantrips 
+@103 = ~Install Level 1 Cantrips~
+@104 = ~Install Level 0 Cantrips~
+//revisions
+@110 = ~Install Local Revision: Install Revised Spells (as per the ini settings)~
+@111 = ~Install Global Revision: Add Necrotic and Radiant Damage Types~
+@112 = ~Install Global Revision: Creatures drop items on disintegration (including cold death)~
+@113 = ~Install Global Revision: All Non-Cantrips always do something~
+@116 = ~Install Global Revision: xft radius spells radiate from target~
+@117 = ~Install Global Revision: xft radius spells radiate from target~
+@118 = ~Install Global Revision: Summoning spells improve by level~
 
-@120 = ~Global Revision: Install Cure Spells Heal % of target's hp~
-@121 = ~Global Revision: Install Cure Spells Damage Undead~
-@122 = ~Global Revision: Install Rituals~
-@123 = ~Global Revision: Install Reversible Spells~
-@124 = ~Global Revision: Silencing Cloud Spells~
-@125 = ~Global Revision: Consistent Invisibility Duration~
-@126 = ~Global Revision: Universal Arcane Spells~
-@127 = ~Global Revision: Unique Spell Lists (via ini)~
-@128 = ~Global Revision: Revised Charm Spells~
-@129 = ~Global Revision: Revised Charm Spells (with added Charm Monster spell)~
-@130 = ~Global Revision: Revised Power Word Spells~
-@131 = ~Global Revision: Unified Touch Spells: Auto Hit (save for half)~
-@132 = ~Global Revision: Unified Touch Spells: Attack Hits (no save)~
-@133 = ~Global Revision: Unified Weapon Spells: Weapon "Summon"~
-@134 = ~Global Revision: Unified Weapon Spells: Weapon "Equipped"~
-@135 = ~Global Revision: Cure Disease Damages Oozes~
-@136 = ~Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)~
-@137 = ~Global Revision: Consistent Invisibility Duration: 8 hours~
-@138 = ~Global Revision: Consistent Invisibility Duration: 4 hours~
-@139 = ~Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility)~
+@119 = ~Local Revision: Install Goodberry: goodberry wine revision~ //should prob just be an option for goodberry revision 
+
+@120 = ~Install Global Revision: Cure Spells Heal % of target's hp~
+@121 = ~Install Global Revision: Cure Spells Damage Undead~
+@122 = ~Install Global Revision: Rituals~
+@123 = ~Install Global Revision: Reversible Spells~
+@124 = ~Install Global Revision: Silencing Cloud Spells~
+@125 = ~Install Global Revision: Consistent Invisibility Duration~
+@126 = ~Install Global Revision: Universal Arcane Spells~
+@127 = ~Install Global Revision: Unique Spell Lists (via ini)~
+@128 = ~Install Global Revision: Revised Charm Spells~
+@129 = ~Install Global Revision: Revised Charm Spells (with added Charm Monster spell)~
+@130 = ~Install Global Revision: Revised Power Word Spells~
+@131 = ~Install Global Revision: Unified Touch Spells: Auto Hit (save for half)~
+@132 = ~Install Global Revision: Unified Touch Spells: Attack Hits (no save)~
+@133 = ~Install Global Revision: Unified Weapon Spells: Weapon "Summon"~
+@134 = ~Install Global Revision: Unified Weapon Spells: Weapon "Equipped"~
+@135 = ~Install Global Revision: Cure Disease Damages Oozes~
+@136 = ~Install Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)~
+@137 = ~Install Global Revision: Consistent Invisibility Duration: 8 hours~
+@138 = ~Install Global Revision: Consistent Invisibility Duration: 4 hours~
+@139 = ~Install Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility)~
+@140 = ~Install Global Revision: Summoning creature stats in spell description~
+@141 = ~Install Global Revision: Fear spells make target flee from enemies~
+@142 = ~Install Global Revision: Energy Drain revision~
+@143 = ~Install Global Revision: Material Spell Components~
 
 @200 = ~Add Spell Scroll Crafting: 2e pnp~
 @201 = ~Add Spell Scroll Crafting: 2e modified~
@@ -53,6 +72,7 @@
 //@901 to @1000: error and misc
 @901 = ~EE games only! ... for now~
 @902 = ~Priest scrolls have already been added by other means!~
+@903 = ~Not applicable to IWDEE~
 
 ///////////////////////////////////////////////////////////////////////////
 // Requirements                                                          //
@@ -68,49 +88,3 @@
 @3008 = ~Component Skipped: Spell Revisions Installed.~
 @3009 = ~Component requires IWDEE and Lefreut UI~
 @3010 = ~No HLAs detected~
-
-/*
-@0 = ~Install All new spells (including IWDEE spells if applicable)~
-@1 = ~Install IWDEE Spells only~
-@2 = ~BGEE or BG2EE required!~
-@3 = ~Install New Spells only~
-@4 = ~Install All new items (including IWDEE items if applicable)~
-@5 = ~New and Revised Spells~
-@6 = ~New Items~
-@8 = ~skipping component~
-@9 = ~Main Component~
-@10 = ~Scroll~
-@11 = ~Level: 1~
-@12 = ~Level: Orison~
-@13 = ~*Please be patient. This will take some time...*~
-@14 = ~IWDEE and New spells already installed!~
-@15 = ~IWDEE spells already installed!~
-@16 = ~New Spells already installed!~
-@17 = ~EE games only!~
-
-@18 = ~Install Infinite Innate Cantrips for all divine and arcane classes~
-@19 = ~Infinite Innate Cantrips~
-@20 = ~Install Infinite Innate Cantrips for all divine classes~
-@21 = ~Install Infinite Innate Cantrips for all arcane classes~
-@22 = ~Install Priest Scrolls~
-@23 = ~Cantrips and Modified Spell Lists~
-@24 = ~Install Innate HLAs through the Spell Menu Button~
-@25 = ~High Level Abilities~
-
-@50 = ~Install the Standard (Simulated PnP) version of Item creation for all casting classes~
-@51 = ~Install the Standard (Simulated PnP) version of Item creation for all casting classes~
-@52 = ~Item Creation~
-@53 = ~Install All Revised Spells (per ini)~
-@54 = ~3e Style Potion Creation~
-
-@100= ~Add New Spells~
-@101= ~Add New Items~
-
-@102= ~Craft only 3e style potions~
-@103= ~Craft only 2e style potions~
-@104= ~Craft 2e style potions and 3e style potions~
-
-@162= ~Class 'Extras'~
-@180=~Add Spontaneous Casting for clerics and druids (by Pecca)~
-
-*/

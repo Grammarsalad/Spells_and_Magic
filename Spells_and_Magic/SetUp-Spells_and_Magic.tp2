@@ -2,78 +2,77 @@ BACKUP ~backup/Spells_and_Magic~
 AUTHOR ~Grammarsalad~
 //README ~Spells_and_Magic\Spells_and_Magic_README.pdf~
 
-VERSION ~0.91.02~
+VERSION ~0.00.01~
 
 
 ALWAYS
 
-        OUTER_SPRINT ~folder~ ~Spells_and_Magic~
+    OUTER_SPRINT ~folder~ ~Spells_and_Magic~ // Replace "Mod_Name" with the actual mod folder name. 
 
-		ACTION_IF GAME_IS ~bg2ee~ THEN BEGIN
-          OUTER_SPRINT ~game~ ~bg2ee~
-        END
+ 	ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
+          OUTER_SPRINT ~gamez~ ~eetwo~
+          OUTER_SPRINT ~vroom~ ~eegate~
+   END
 
-		ACTION_IF GAME_IS ~bgee~ THEN BEGIN
-          OUTER_SPRINT ~game~ ~bgee~
-        END
+ 	ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+          OUTER_SPRINT ~gamez~ ~eeone~
+          OUTER_SPRINT ~vroom~ ~eegate~
+    END
 
-		ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-          OUTER_SPRINT ~game~ ~iwdee~
-        END
+ 	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+          OUTER_SPRINT ~gamez~ ~ice~
+          OUTER_SPRINT ~vroom~ ~eeice~
+    END
 
-		ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
-          OUTER_SPRINT ~style~ ~bgee~
-        END
+ 	ACTION_IF GAME_IS ~bg2 bgt~ THEN BEGIN
+          OUTER_SPRINT ~gamez~ ~bgtwoold~
+          OUTER_SPRINT ~vroom~ ~gate~
+    END
 
-		ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
-          OUTER_SPRINT ~style~ ~iwdee~
-        END
+ 	ACTION_IF GAME_IS ~bg~ THEN BEGIN
+          OUTER_SPRINT ~gamez~ ~no~
+          OUTER_SPRINT ~vroom~ ~nope~
+    END
 
-		INCLUDE ~Spells_and_Magic/Spells_and_Magic.ini~
+ 	ACTION_IF GAME_IS ~bgee bg2ee eet~ THEN BEGIN
+          OUTER_SPRINT ~vroom~ ~bgee_vroom~
+    END
 
-        INCLUDE ~Spells_and_Magic/craft_settings.ini~
+ 	ACTION_IF GAME_IS ~iwdee~ THEN BEGIN
+          OUTER_SPRINT ~vroom~ ~iwdee_vroom~
+    END
 
-        INCLUDE ~Spells_and_Magic/lib/variables.ini~
+    INCLUDE ~Spells_and_Magic/Spells_and_Magic_settings.ini~ 	//player set variables 
 
-        INCLUDE ~Spells_and_Magic/lib/item_casting.tpa~
+    INCLUDE ~Spells_and_Magic/lib/snm_functions.tpa~ 					//assorted functions 
 
-        INCLUDE ~Spells_and_Magic/lib/snm_functions.tpa~
+    INCLUDE ~Spells_and_Magic/lib/lib.tpa~  							//morph's hla functions
 
-        INCLUDE ~Spells_and_Magic/lib/lib.tpa~  //morph's hla functions
+    INCLUDE ~Spells_and_Magic/lib/scroll_placement.tpa~
 
-        INCLUDE ~Spells_and_Magic/lib/hla_actions.tpa~  //SD's hla functions
+    INCLUDE ~Spells_and_Magic/lib/summon_table.tpa~
 
-        INCLUDE ~Spells_and_Magic/lib/add_headers.tpa~
+    INCLUDE ~Spells_and_Magic/lib/splprot_attributes.tpa~
 
-        INCLUDE ~Spells_and_Magic/lib/add_spell_ex.tpa~
+    INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_fnp.tpa~
 
-        INCLUDE ~Spells_and_Magic/lib/effect_return.tpa~
+    INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_b_vise.tpa~
 
-        INCLUDE ~Spells_and_Magic/lib/add_sumtable.tpa~
+    INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_spell_saves.tpa~
 
-		INCLUDE ~Spells_and_Magic/lib/SEQUENCER_MENU.tpa~
+    INCLUDE ~Spells_and_Magic/lib/ClassSpellTool.tpa~
 
-        INCLUDE ~Spells_and_Magic/lib/alter_effect.tpa~
+    INCLUDE ~Spells_and_Magic/lib/item_casting.tpa~
 
-		INCLUDE ~Spells_and_Magic/lib/remove_lines.tpa~
+    INCLUDE ~Spells_and_Magic/lib/add_headers.tpa~
 
-		INCLUDE ~Spells_and_Magic/lib/summon_table.tpa~
+    INCLUDE ~Spells_and_Magic/lib/add_sumtable.tpa~
 
-		INCLUDE ~Spells_and_Magic/lib/splprot_attributes.tpa~
+    INCLUDE ~Spells_and_Magic/lib/SEQUENCER_MENU.tpa~
 
-		INCLUDE ~Spells_and_Magic/lib/spell_to_innate.tpa~
+    INCLUDE ~Spells_and_Magic/lib/spell_to_innate.tpa~
 
-		INCLUDE ~Spells_and_Magic/lib/spell_clone_effects.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_fnp.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_b_vise.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/bg2fp_effect_batches_spell_saves.tpa~
-
-        INCLUDE ~Spells_and_Magic/lib/extra_alter_effect.tpa~
-
-		INCLUDE ~Spells_and_Magic/lib/scroll_placement.tpa~
+    INCLUDE ~Spells_and_Magic/lib/spell_clone_effects.tpa~
 
 END
 
@@ -88,18 +87,16 @@ ASK_EVERY_COMPONENT
 AUTO_TRA ~Spells_and_Magic/tra/%s~
 LANGUAGE ~English~ ~english~
          ~Spells_and_Magic/tra/english/setup.tra~
-         ~Spells_and_Magic/tra/english/IWD_spells.tra~  //for IWDEE spells
-         ~Spells_and_Magic/tra/english/new_spells.tra~  //for new spells
+		 ~Spells_and_Magic/tra/english/new_spells.tra~  //for new spells
+		 ~Spells_and_Magic/tra/english/IWD_spells.tra~  //for IWDEE spells
          ~Spells_and_Magic/tra/english/enchant_items.tra~
-//         ~Spells_and_Magic/tra/english/cantrips.tra~  //for cantrips
-//         ~Spells_and_Magic/tra/english/revised.tra~  //for revised
-//         ~Spells_and_Magic/tra/english/items.tra~  //for items
-         ~Spells_and_Magic/tra/english/icons.tra~   //icons
-
-///NOTE TO SELF: COMPLETELY REDO tp2 with finished products from Spells_and_Magic/comp/%VAR%.tpa~
+         ~Spells_and_Magic/tra/english/cantrips.tra~  //for cantrips
+         ~Spells_and_Magic/tra/english/revised.tra~  //for revised
+         ~Spells_and_Magic/tra/english/items.tra~  //for items
+		 ~Spells_and_Magic/tra/english/icons.tra~   //icons
 
 
-//CONTINUE FROM HERE
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,31 +107,52 @@ LANGUAGE ~English~ ~english~
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//@0 to @50: groups
+//@51 to @100: subcomponents
+//@101 to @900: Components
+//@901 to @1000: error and misc
+// @3000 to @4000: Requirements
+
 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 ///////                                                   ///////
-///////          Components 101-10x: New Spells           ///////
+///////          Components 101-104: New Spells           ///////
 ///////                                                   ///////
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
+
 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//			101: Install All New Spells 
+//			101: Install All New Spells (including iwdee spells) 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
-BEGIN @101  //Install All New Spells (including iwdee spells if not already installed)
+BEGIN @101  //Install All New Spells (including iwdee spells)
 SUBCOMPONENT @51 //New Spells
 DESIGNATED 101
 GROUP @0  //New and Revised Spells
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @903 // ~Not applicable to IWDEE~
+
+//no touch variables
+
+LAM b_spells_no_touch
 
 //set relevant variables
-OUTER_SET b_new_spells    = 1
-OUTER_SET b_iwdee_spells  = 1
+
+
+  //only good for current install, so let's fix for any time ini is loaded: 
+
+  COPY ~%folder%/Spells_and_Magic_settings.ini~ ~%folder%/Spells_and_Magic_settings.ini~
+     REPLACE_TEXTUALLY ~OUTER_SET b_new_spells    = 0~ ~OUTER_SET b_new_spells    = 1~
+     REPLACE_TEXTUALLY ~OUTER_SET b_iwdee_spells  = 0~ ~OUTER_SET b_iwdee_spells  = 1~
+
+  //set the var in the orig ini
+    OUTER_SET b_new_spells    = 1
+	OUTER_SET b_iwdee_spells  = 1
 
 //SR NWN deflection compatibility
 ACTION_CLEAR_ARRAY aoe_spell
@@ -142,6 +160,7 @@ ACTION_CLEAR_ARRAY aoe_spell
 ///////////////////////////////////////
 //////////// player modified variables
 
+LAM b_spells_settings_global
 LAM b_spells_new_spells_settings
 LAM b_spells_iwdee_spells_settings
 LAM b_spells_cantrip_0_settings //because this gets checked on occasion
@@ -162,531 +181,205 @@ INCLUDE ~%folder%/comp/Setup_New_Arcane_Spells.tpa~  //
 //divine spells
 INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 
-/*
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//			102: Install All New Spells (excluding iwdee spells if applicable) 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
 
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-///////                                                                           ///////
-///////    Components 110-119: REVISED SPELLS SETTINGS - LOCAL SPELL REVISIONS    ///////
-///////                                                                           ///////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @102  //Install All New Spells (excluding iwdee spells if applicable)
+SUBCOMPONENT @51 //New Spells
+DESIGNATED 102
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//set relevant variables
+
+LAM b_spells_no_touch
+
+  //only good for current install, so let's fix for any time ini is loaded: 
+
+  COPY ~%folder%/Spells_and_Magic_settings.ini~ ~%folder%/Spells_and_Magic_settings.ini~
+     REPLACE_TEXTUALLY ~OUTER_SET b_new_spells    = 0~ ~OUTER_SET b_new_spells    = 1~
+
+  //set the var in the orig ini
+OUTER_SET b_new_spells    = 1
+
+ACTION_IF (GAME_IS ~iwdee~) BEGIN  //Note that IWDEE spells are included if installed on iwdee (duh!)
+ OUTER_SET b_iwdee_spells  = 1
+  COPY ~%folder%/Spells_and_Magic_settings.ini~ ~%folder%/Spells_and_Magic_settings.ini~
+     REPLACE_TEXTUALLY ~OUTER_SET b_iwdee_spells  = 0~ ~OUTER_SET b_iwdee_spells  = 1~	 
+END
+
+//SR NWN deflection compatibility
+ACTION_CLEAR_ARRAY aoe_spell
+
+///////////////////////////////////////
+//////////// player modified variables
+
+LAM b_spells_settings_global
+LAM b_spells_new_spells_settings
+LAM b_spells_iwdee_spells_settings //needed? Remove existing spells if specified? 
+LAM b_spells_cantrip_0_settings //because this gets checked on occasion
+LAM b_spells_cantrip_1_settings //because this gets checked on occasion
+
+
+//arcane spells
+INCLUDE ~%folder%/comp/Setup_New_Arcane_Spells.tpa~  //
+
+
+//divine spells
+INCLUDE ~%folder%/comp/Setup_New_Divine_Spells.tpa~  //
 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 //
-//	 110: Install Revised Spells: revised spells (as per the ini settings)
+//			103: Install Level 1 Cantrips 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @103  //Install Level 1 Cantrips
+SUBCOMPONENT @58 //Cantrips
+DESIGNATED 103
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//			104: Install Level 0 Cantrips 
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+
+BEGIN @104  //Install Level 0 Cantrips
+SUBCOMPONENT @58 //Cantrips
+DESIGNATED 104
+GROUP @0  //New and Revised Spells
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+///////                                                   ///////
+///////      Components 110-11x: Revised Spells           ///////
+///////                                                   ///////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+
+
+//__________________________________________________________________________________
+//__________________________________________________________________________________
+//
+//			110: Install Local Revision: Install Revised Spells (as per the ini settings) 
 //__________________________________________________________________________________
 //__________________________________________________________________________________
 
 BEGIN @110  //Local Revision: Install Revised Spells (as per the ini settings)
+//SUBCOMPONENT @59 //Revised Spells: Global Revisions
 DESIGNATED 110
 GROUP @0  //New and Revised Spells
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @903 // ~Not applicable to IWDEE~
 
-//revised spells ini
-LAM b_spells_new_spells_settings
-
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//			119: Install Goodberry: goodberry wine revision
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @119  //Local Revision: Install Goodberry: goodberry wine revision
-DESIGNATED 119
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-///////                                                                           ///////
-///////    Components 120-1xx: REVISED SPELLS SETTINGS - GLOBAL SPELL REVISIONS   ///////
-///////                                                                           ///////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	120: Global Revision: Install Cure Spells Heal % of target's hp
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @120  // Global Revision: Install Cure Spells Heal % of target's hp
-DESIGNATED 120
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	121: Global Revision: Install Cure Spells Damage Undead
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @121 // ~Global Revision: Install Cure Spells Damage Undead~
-DESIGNATED 121
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	122: Global Revision: Install Rituals 
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @122 // ~Global Revision: Install Rituals~
-DESIGNATED 122
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	123: Global Revision: Install Reversible Spells
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @123 // ~Global Revision: Install Reversible Spells~
-DESIGNATED 123
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	124: Global Revision: Silencing Cloud Spells
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @124 // ~Global Revision: Silencing Cloud Spells~
-DESIGNATED 124
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	126: Global Revision: Universal Arcane Spells
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @126 // ~Global Revision: Universal Arcane Spells~
-DESIGNATED 126
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	127: Global Revision: Unique Spell Lists (via ini)
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @127 // ~Global Revision: Unique Spell Lists (via ini)~
-DESIGNATED 127
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	128: Global Revision: Revised Charm Spells 
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @128 // ~Global Revision: Revised Charm Spells~
-SUBCOMPONENT @54 // ~Charm Revision~
-DESIGNATED 128
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	129: Global Revision: Revised Charm Spells (with added Charm Monster spell)
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @129 // Global Revision: Revised Charm Spells (with added Charm Monster spell)
-SUBCOMPONENT @54 // ~Charm Revision~
-DESIGNATED 129
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	130: Global Revision: Revised Power Word Spells
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @130 // Global Revision: Revised Power Word Spells 
-DESIGNATED 130
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	131: Global Revision: Unified Touch Spells: Auto Hit (save for half)
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @131 // Global Revision: Unified Touch Spells: Auto Hit (save for half)
-SUBCOMPONENT @55 // ~Unified Touch Spells~
-DESIGNATED 131
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	132: Global Revision: Unified Touch Spells: Attack Hits (no save)
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @132 // Global Revision: Unified Touch Spells: Attack Hits (no save)
-SUBCOMPONENT @55 // ~Unified Touch Spells~
-DESIGNATED 132
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	133: Global Revision: Unified Weapon Spells: Weapon "Summon"
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @133 //  Global Revision: Unified Weapon Spells: Weapon "Summon" 
-SUBCOMPONENT @56 // ~Unified Weapon Spells~
-DESIGNATED 133
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	134: Global Revision: Unified Weapon Spells: Weapon "Equipped"
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @134 // ~Global Revision: Unified Weapon Spells: Weapon "Equipped"~
-SUBCOMPONENT @56 // ~Unified Weapon Spells~
-DESIGNATED 134
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	135: Global Revision: Cure Disease Damages Oozes
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @135 // ~Global Revision: Cure Disease Damages Oozes~
-DESIGNATED 135
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-// 136: Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @136 // ~Global Revision: Consistent Invisibility Duration: 24 hours (as 2nd level spell)~
-SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
-DESIGNATED 136
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	137: Global Revision: Consistent Invisibility Duration: 8 hours 
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @137 // ~Global Revision: Consistent Invisibility Duration: 8 hours~
-SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
-DESIGNATED 137
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	138: Global Revision: Consistent Invisibility Duration: 4 hours
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @138 // ~Global Revision: Consistent Invisibility Duration: 4 hours~
-SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
-DESIGNATED 138
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-// 139: Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility) 
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-
-BEGIN @139 // ~Global Revision: Consistent Invisibility Duration: 3 rounds, +1 level (as improved invisibility)~
-SUBCOMPONENT @57 // ~Consistent Invisibility Duration~
-DESIGNATED 139
-GROUP @0  //New and Revised Spells
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////                                                                          ////////////////////////
-////////////////////////               Spells & Magic: 200 - ???: Magic Item Creation             ////////////////////////
-////////////////////////                                                                          ////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-///////                                                   ///////
-///////           Components 200-20x: Scrolls             ///////
-///////                                                   ///////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	200: Craft Spell Scrolls: Add Spell Scroll Crafting: 2e pnp
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @200  //Add Spell Scroll Crafting
-SUBCOMPONENT @52 //Scroll Crafting
-DESIGNATED 200
-GROUP @2  //Magic Item Creation
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @3004
-REQUIRE_PREDICATE (!(GAME_IS ~iwdee~) OR (FILE_EXISTS_IN_GAME ~mohla01.itm~ )) @3010
-
-
-LAM b_scroll_global_settings
-
-LAM b_scroll_level_settings
-
-//marker
-COPY_EXISTING ~SW1H04.itm~ ~override/B_sam200.itm~
-
-ACTION_IF (%b_add_priest_scrolls% = 1) BEGIN //if set to add priest scrolls
-  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam201.itm~
-
-  INCLUDE ~%folder%/lib/Setup_Priest_Scrolls.tpa~
+//set relevant variables
+
+LAM b_spells_no_touch
+
+  //only good for current install, so let's fix for any time ini is loaded: 
+
+  COPY ~%folder%/Spells_and_Magic_settings.ini~ ~%folder%/Spells_and_Magic_settings.ini~
+     REPLACE_TEXTUALLY ~OUTER_SET b_local_revisions  = 0~ ~OUTER_SET b_local_revisions  = 1~	 
+
+  //set the var in the orig ini
+ OUTER_SET b_local_revisions  = 1
+
+//SR NWN deflection compatibility
+ACTION_CLEAR_ARRAY aoe_spell
+
+///////////////////////////////////////
+//////////// player modified variables
+
+LAM b_spells_settings_global
+LAM b_spells_settings_rev_spells
+LAM b_spells_iwdee_spells_settings //needed? Remove existing spells if specified? 
+LAM b_spells_cantrip_0_settings //because this gets checked on occasion
+LAM b_spells_cantrip_1_settings //because this gets checked on occasion
+
+
+//arcane spells
+INCLUDE ~%folder%/comp/Setup_Revised_Arcane_Spells.tpa~  //
+
+
+//divine spells
+//INCLUDE ~%folder%/comp/Setup_Revised_Divine_Spells.tpa~  //
+
+/*
+
+BEGIN @101  // Install Component Name
+SUBCOMPONENT @51 //Subcomponent Name
+DESIGNATED 101
+GROUP @0  //Group Name
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! For ee games only~
+
+///////////////////////////////////////
+//////////// player modified variables
+
+//call up and read the var categories set by player
+ LAM b_skills_n_proficiencies
+ 
+//set 'hard coded' variable(s) for this component (where relevant)
+// OUTER_SET b_ini_var  = 1
+
+//install iwdee spells if applicable
+
+ACTION_IF ("%vroom%" STRING_COMPARE_CASE "eeice" != 0) BEGIN      //Difference in vroom -- e.g. Not IWDEE vroom
+//  INCLUDE ~%folder%/engine/b_stuff.tpa~  //
 END
 
-INCLUDE ~%folder%/components/class_skills/scroll_crafting.tpa~  //
-
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	201: Craft Spell Scrolls: Add Spell Scroll Crafting: 2e modified
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @201  //Add Spell Scroll Crafting (add missing priest scrolls)
-SUBCOMPONENT @52 //Scroll Crafting
-DESIGNATED 201
-GROUP @2  //Magic Item Creation
-REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @3004
-REQUIRE_PREDICATE (!(GAME_IS ~iwdee~) OR (FILE_EXISTS_IN_GAME ~mohla01.itm~ )) @3010
-REQUIRE_PREDICATE !(FILE_EXISTS_IN_GAME ~B_sna201.itm~) AND !(FILE_EXISTS_IN_GAME ~B_fnp070.itm~) @3007  //~Priest scrolls have already been added!~
-
-LAM b_scroll_global_settings
-
-LAM b_scroll_level_settings
-
-//2e modified settings
-
-OUTER_SET b_mage_scroll     =  1
-OUTER_SET b_cleric_scroll   =  4
-OUTER_SET b_druid_scroll    =  6
-OUTER_SET b_bard_scroll     = 13
-OUTER_SET b_paladin_scroll  =  0
-OUTER_SET b_ranger_scroll   =  0
-OUTER_SET b_sorc_scroll     =  4
-OUTER_SET b_shaman_scroll   =  6
-
-ACTION_IF (%b_add_priest_scrolls% = 1) BEGIN //if set to add priest scrolls
-
-//marker
-  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam201.itm~
-
-  INCLUDE ~%folder%/lib/Setup_Priest_Scrolls.tpa~
+ACTION_IF ("%vroom%" STRING_COMPARE_CASE "eeice" = 0) BEGIN      //Difference in style -- e.g. IS IWDEE style
+//  INCLUDE ~%folder%/engine/b_stuff.tpa~  //
 END
 
-INCLUDE ~%folder%/components/class_skills/scroll_crafting.tpa~
 
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
-///////                                                   ///////
-///////           Components 210-20x: Potions             ///////
-///////                                                   ///////
-/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////
 
-//__________________________________________________________________________________
-//__________________________________________________________________________________
+//the actual component(s)
+// INCLUDE ~%folder%/components/SUBFOLDER/Setup_Component.tpa~  //
+
+
+//_______________________________
 //
-//	210: Add Brew Potion: 2e pnp
-//__________________________________________________________________________________
-//__________________________________________________________________________________
+//	###: Component Name (102)
+//
+//_________________________________________
 
-BEGIN @210  //Add Brew Potion
-SUBCOMPONENT @53 // ~Potion Brewing~
-DESIGNATED 210
-GROUP @2  //Magic Item Creation
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
+BEGIN @102  // Install Component Name
+SUBCOMPONENT @51 //Subcomponent Name
+DESIGNATED 102
+GROUP @0  //Group Name
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! For ee games only~
 
-LAM b_potion_global_settings
+//set relevant variable(s) (from ini) relevant to this component  
+OUTER_SET b_ini_var  = 2
 
-ACTION_IF (%b_3e_potion_create% = 1) BEGIN //if set to add priest scrolls
-  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam211.itm~
 
-  INCLUDE ~%folder%/lib/Setup_3e_potions.tpa~
+///////////////////////////////////////
+//////////// player modified variables
 
+//call up and red the var categories
+LAM b_group_var_settings
+
+//install iwdee spells if applicable
+
+ACTION_IF ("%style%" STRING_COMPARE_CASE "iwdee_style" != 0) BEGIN      //Difference in style -- e.g. Not IWDEE style
+//  INCLUDE ~%folder%/engine/b_stuff.tpa~  //
 END
 
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-//
-//	211: Add Brew Potion: 2e modified
-//__________________________________________________________________________________
-//__________________________________________________________________________________
-
-BEGIN @211  //Add Brew Potion (and add 3e potions)
-SUBCOMPONENT @53 // ~Potion Brewing~
-DESIGNATED 211
-GROUP @2  //Magic Item Creation
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet iwdee~ @901 // ~EE games only! ... for now~
-
-LAM b_potion_global_settings
-
-ACTION_IF (%b_3e_potion_create% = 1) BEGIN //if set to add priest scrolls
-  COPY_EXISTING ~SW1H04.itm~ ~override/B_sam211.itm~
-
-  INCLUDE ~%folder%/lib/Setup_3e_potions.tpa~
-
+ACTION_IF ("%style%" STRING_COMPARE_CASE "iwdee_style" = 0) BEGIN      //Difference in style -- e.g. IS IWDEE style
+//  INCLUDE ~%folder%/engine/b_stuff.tpa~  //
 END
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////                                                                          ////////////////////////
-////////////////////////              Spells & Magic: 300-???: New and Revised Items              ////////////////////////
-////////////////////////                                                                          ////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-///////                                                              ///////
-///////                Components 300-30x: New Items                 ///////
-///////                                                              ///////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-///////                                                              ///////
-///////               Components 310-31x: Revised Items              ///////
-///////                                                              ///////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////                                                                          ////////////////////////
-////////////////////////       Spells & Magic: 400 - ???: Expanded Abilities and Attributes       ////////////////////////
-////////////////////////                                                                          ////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////                                                                          ////////////////////////
-////////////////////////   Spells & Magic: 500 - ???: Cantrips, Rituals and Modified Spell Lists  ////////////////////////
-////////////////////////                                                                          ////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-///////                                                              ///////
-///////                  Components 500-50x: Cantrips                ///////
-///////                                                              ///////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-///////                                                              ///////
-///////          Components 510-51x: Unique Spell Lists              ///////
-///////                                                              ///////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-///////                                                              ///////
-///////          Components 520-52x: High Level Abilities            ///////
-///////                                                              ///////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-///////                                                              ///////
-///////                Components 530-53x: Rituals                   ///////
-///////                                                              ///////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////                                                                          ////////////////////////
-////////////////////////                   Spells & Magic: 600 - ???: Limitations                 ////////////////////////
-////////////////////////                                                                          ////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////                                                                          ////////////////////////
-////////////////////////                     Spells & Magic: 700 - ???: Extras                    ////////////////////////
-////////////////////////                                                                          ////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//the actual component(s)
+// INCLUDE ~%folder%/comp/Setup_Component.tpa~  //
 
 */

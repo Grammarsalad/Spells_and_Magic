@@ -1,3 +1,5 @@
+//Credit: CamDawg
+
 DEFINE_ACTION_FUNCTION cd_new_summon_table
   STR_VAR descript = "foo"
           2da_file = "foo"

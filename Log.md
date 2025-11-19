@@ -2,6 +2,14 @@
 
 # log
 
+Spells and Magic 0.00.01
+
+2025-11-19
+
+- Set up basics of spell revisions
+
+- Spell revisions: Armor (first draft)
+
 2022-12-01
 
 - Updated scroll component
