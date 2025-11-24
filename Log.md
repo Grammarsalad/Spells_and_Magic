@@ -2,6 +2,14 @@
 
 # log
 
+2025-11-22
+
+- Grease spell (description only) 
+
+2025-11-20
+
+- Burning Hands patch
+
 Spells and Magic 0.00.01
 
 2025-11-19
