@@ -2,6 +2,10 @@
 
 # log
 
+2025-11-23
+
+- Grease AC penalty 
+
 2025-11-22
 
 - Grease spell (description only) 
