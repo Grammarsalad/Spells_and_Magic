@@ -8,6 +8,8 @@ VERSION ~0.00.01~
 ALWAYS
 
     OUTER_SPRINT ~folder~ ~Spells_and_Magic~ // Replace "Mod_Name" with the actual mod folder name. 
+	
+//is all of this necessary???
 
  	ACTION_IF GAME_IS ~bg2ee eet~ THEN BEGIN
           OUTER_SPRINT ~gamez~ ~eetwo~

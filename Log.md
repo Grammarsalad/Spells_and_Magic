@@ -2,6 +2,10 @@
 
 # log
 
+2025-12-01
+
+- Color spray blind immune and alter level immune 
+
 2025-11-23
 
 - Grease AC penalty 
